@@ -1,5 +1,5 @@
-\chapter{DESAIN DAN IMPLEMENTASI}
-\label{chap:desainimplementasi}
+\chapter{METODOLOGI}
+\label{chap:metodologi}
 
 \section{Metode yang dirancang}
 \label{sec:metode yang dirancang}
@@ -19,7 +19,9 @@ Metode yang dirancang pada penelitian ini sebagaimana ditunjukkan pada Gambar \r
 \begin{itemize}[topsep=0pt]
   \item \textbf{Studi Literatur}
   
-  Pada tahap ini dilakukan riset studi literatur mengenai konsep dan permasalahan-permasalahan yang sudah ada terkait DISC, Apache Spark, Titian, DistilGPT2, dan FastAPI. Studi literatur didapatkan melalui buku, internet, jurnal penelitian, dan materi-materi kuliah yang berkaitan dengan metode yang akan digunakan.
+  Pada tahap ini dilakukan riset studi literatur mengenai konsep 
+  dan permasalahan - permasalahan yang sudah ada terkait DISC, 
+  Apache Spark, Titian, DistilGPT2, dan FastAPI. Studi literatur didapatkan melalui buku, internet, jurnal penelitian, dan materi-materi kuliah yang berkaitan dengan metode yang akan digunakan.
 
   \item \textbf{Perancangan Arsitektur Sistem}
   
@@ -32,9 +34,53 @@ Metode yang dirancang pada penelitian ini sebagaimana ditunjukkan pada Gambar \r
     \label{fig:arsitektur}
   \end{figure}
   
-  Tahap perancangan arsitektur sistem dilakukan dengan mengombinasikan dasar teori pada bab 2. Perancangan metode akan dimulai dari proses pemisahan dataset berdasarkan data yang benar dan yang bermasalah, generate input beserta re-training, pengaksesan model menggunakan FastAPI yang di-deploy di AWS EC2, hingga penggabungan keseluruhan proses menjadi satu arsitektur utuh yang dapat di lihat pada Gambar \ref{fig:arsitektur}.
+  Tahap perancangan arsitektur sistem pada penelitian ini 
+  dilakukan dengan mengombinasikan dasar teori pada bab 2. 
+  Perancangan metode akan dimulai dari proses \emph{pre-training}
+  terhadap model DistilGPT2 menggunakan baris dataset random dari 
+  dataset masing-masing \emph{benchmark program} yang akan 
+  diuji. Kemudian program tersebut akan diberikan parameter tertentu 
+  agar dapat menghasilkan output yang bermasalah. Setelah itu,
+  dengan menggunakan Titian, akan dilakukan proses \emph{provenance data}
+  untuk mendapatkan nilai awal dari baris dataset yang menyebabkan
+  keluaran yang mencurigakan tersebut. 
+  Setelah itu, dilakukan proses re-training lagi terhadap
+  model DistilGPT2 menggunakan baris dataset penyebab kesalahan
+  tersebut yang kemudian dilakukan proses \emph{generate input}
+  baru yang menginduksi kesalahan pada program tersebut dengan jumlah
+  yang seminimal mungkin dapat dianalisis oleh \emph{developer}. 
+  Hasil dari proses ini kemudian akan dijalankan kembali menggunakan
+  program yang sama untuk melihat apakah program tersebut masih
+  menghasilkan keluaran yang bermasalah atau tidak.
+  Alur keseluruhan proses tersebut dapat dilihat pada 
+  Gambar \ref{fig:arsitektur}.
 
   \item \textbf{Perancangan Metode Generate Input}
+  
+% endpoint API with FastAPI
+% list-model
+% - return current, name list
+
+% use-model
+% - change current
+% —if(not in list)
+% 	- make new from base
+% - return status
+
+% retrain
+% - retrain the model
+% - return status
+
+% generate
+% - return generate
+
+% reset
+% - reset the current from base
+% - return status
+
+% delete
+% - delete folder current
+% - return status 
   
   \begin{figure}[H]
     \centering
@@ -46,11 +92,33 @@ Metode yang dirancang pada penelitian ini sebagaimana ditunjukkan pada Gambar \r
 
   \end{figure}
   
-  Tahap perancangan metode generate input dilakukan dengan melakukan proses traning dan re-training terhadap DistilGPT2 model. Tahap ini dapat ditunjukkan melalui Gambar \ref{fig:generateinput}.
+  Tahap perancangan metode generate input dilakukan dengan 
+  melakukan proses traning dan re-training terhadap 
+  DistilGPT2 model. Proses ini dilakukan dengan membuat sebuah
+  API dengan menggunakan FastAPI yang dapat diakses oleh pengguna. 
+  API ini akan memiliki beberapa endpoint yang dapat digunakan 
+  oleh pengguna untuk melakukan proses \emph{generate input} baru, 
+  \emph{re-training new model}, dan \emph{reset model}. Proses 
+  penggunaan API ini dilakukan dalam dua tahap, yaitu \emph{local} 
+  dan \emph{cloud} milik Amazon Web Service (AWS).
+  Tahap ini dapat ditunjukkan melalui Gambar \ref{fig:generateinput}.
 
   \item \textbf{Pengembangan Sistem}
   
-  Pengembangan sistem dilakukan dengan menerapkan algoritma solusi yang dirancang pada subbab perancangan arsitektur sistem dan perancangan metode generate input. Untuk API yang dihasilkan pada perancangan metode generate input akan menggunakan bahasa pemrograman python, sedangkan untuk sistem secara keseluruhan akan menggunakan bahasa pemrograman Scala. Kode program penelitian ini dirancang untuk dapat dipasangkan ke sebuah program yang merupakan program target dilakukannya proses debugging dan generate test input di sistem DISC Apache Spark. Pada saat program target tersebut dijalankan, program pada penelitian ini akan memonitor data input, melakukan re-training model terhadap data yang benar, dan akan melakukan proses generate test input baru untuk menggantikan test input yang bermasalah. 
+  Pengembangan sistem dilakukan dengan menerapkan algoritma 
+  solusi yang dirancang pada subbab perancangan arsitektur 
+  sistem dan perancangan metode generate input. Untuk API 
+  yang dihasilkan pada perancangan metode generate input 
+  akan menggunakan bahasa pemrograman python, sedangkan 
+  untuk sistem secara keseluruhan akan menggunakan bahasa 
+  pemrograman Scala. Kode program penelitian ini dirancang 
+  untuk dapat dipasangkan ke sebuah program yang merupakan 
+  program target dilakukannya proses debugging dan generate 
+  test input di sistem DISC Apache Spark. Pada saat program 
+  target tersebut dijalankan, program pada penelitian ini akan 
+  memonitor data input, melakukan re-training model terhadap 
+  data yang benar, dan akan melakukan proses generate test 
+  input baru untuk menggantikan test input yang bermasalah. 
 
   \item \textbf{Analisis Kinerja Sistem}
   
@@ -65,13 +133,13 @@ Metode yang dirancang pada penelitian ini sebagaimana ditunjukkan pada Gambar \r
     \begin{enumerate}[topsep=0pt]
       \item Latar Belakang
       \item Rumusan Masalah
-      \item Batasan Tugas Akhir
+      \item Batasan Masalah
       \item Tujuan
-      \item Metodologi
+      \item Manfaat
     \end{enumerate}
     \item Tinjauan Pustaka
-    \item Desain dan Implementasi
-    \item Pengujian dan Evaluasi
+    \item Metodologi
+    \item Hasil dan Pembahasan
     \item Kesimpulan dan Saran
     \item Daftar Pustaka
   \end{enumerate}
