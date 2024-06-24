@@ -1,0 +1,11 @@
+function apakahBilanganPrima(nilai):
+    if nilai > 1 then
+        for i from 2 to nilai - 1 do
+            if nilai mod i == 0 then
+                return false
+        end for
+        return true
+    else
+        return false
+    end if
+end function

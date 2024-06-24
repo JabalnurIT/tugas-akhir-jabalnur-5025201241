@@ -1,6 +1,6 @@
 % Judul dokumen
-\title{Buku Tugas Akhir ITS}
-\author{Musk, Elon Reeve}
+\title{Buku Tugas Akhir}
+\author{Jabalnur}
 
 % Pengaturan ukuran teks dan bentuk halaman dua sisi
 \documentclass[12pt,twoside]{report}
@@ -10,6 +10,7 @@
 
 % Pengaturan ukuran spasi
 \usepackage[singlespacing]{setspace}
+% \usepackage{tocloft}
 
 % Pengaturan detail pada file PDF
 \usepackage[pdfauthor={\@author},bookmarksnumbered,pdfborder={0 0 0}]{hyperref}
@@ -28,6 +29,7 @@
 \usepackage{enumitem}
 \usepackage{eso-pic}
 \usepackage{txfonts} % Font times
+% \usepackage{fontspec}
 \usepackage{etoolbox}
 \usepackage{graphicx}
 \usepackage{lipsum}
@@ -35,6 +37,8 @@
 \usepackage{tabularx}
 \usepackage{wrapfig}
 \usepackage{float}
+\usepackage{titlesec}
+\usepackage{titletoc}
 
 % Definisi untuk "Hati ini sengaja dikosongkan"
 \patchcmd{\cleardoublepage}{\hbox{}}{
@@ -42,6 +46,9 @@
   \vspace*{\fill}
   \begin{center}\textit{[Halaman ini sengaja dikosongkan]}\end{center}
   \vfill}{}{}
+
+% Pengaturan Font
+% \setmainfont{Trebuchet MS}
 
 % Pengaturan penomoran halaman
 \usepackage{fancyhdr}
@@ -86,7 +93,7 @@
 
 % Pengaturan format judul bab
 \usepackage{titlesec}
-\titleformat{\chapter}[display]{\bfseries\Large}{BAB \centering\Roman{chapter}}{0ex}{\vspace{0ex}\centering}
+\titleformat{\chapter}[display]{\bfseries\large}{BAB \centering\Roman{chapter}}{0ex}{\vspace{0ex}\centering}
 \titleformat{\section}{\bfseries\large}{\MakeUppercase{\thesection}}{1ex}{\vspace{1ex}}
 \titleformat{\subsection}{\bfseries\large}{\MakeUppercase{\thesubsection}}{1ex}{}
 \titleformat{\subsubsection}{\bfseries\large}{\MakeUppercase{\thesubsubsection}}{1ex}{}
@@ -123,6 +130,14 @@
   tabsize=2,
 }
 \lstset{style=codestyle}
+
+% Pengaturan format daftar isi
+\titlecontents{chapter}
+[4.5em]
+{\smallskip}
+{\contentslabel[\MakeUppercase{bab~\romannumeral\thecontentslabel}]{4em}\MakeUppercase}
+{\hspace*{-4em}\MakeUppercase}
+{\hfill\contentspage}[\medskip]
 
 % Isi keseluruhan dokumen
 \begin{document}
@@ -184,18 +199,21 @@
 
 % Daftar isi
 \renewcommand*\contentsname{DAFTAR ISI}
+\label{chap:daftar isi}
 \addcontentsline{toc}{chapter}{\contentsname}
 \tableofcontents
 \cleardoublepage
 
 % Daftar gambar
 \renewcommand*\listfigurename{DAFTAR GAMBAR}
+\label{chap:daftar gambar}
 \addcontentsline{toc}{chapter}{\listfigurename}
 \listoffigures
 \cleardoublepage
 
 % Daftar tabel
 \renewcommand*\listtablename{DAFTAR TABEL}
+\label{chap:daftar tabel}
 \addcontentsline{toc}{chapter}{\listtablename}
 \listoftables
 \cleardoublepage

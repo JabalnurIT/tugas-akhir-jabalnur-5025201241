@@ -1,7 +1,4 @@
-\begin{center}
-  \large\textbf{ABSTRAK}
-\end{center}
-
+\chapter*{ABSTRAK}
 \addcontentsline{toc}{chapter}{ABSTRAK}
 
 \vspace{2ex}
@@ -17,12 +14,16 @@
   Judul Tugas Akhir & : & \tatitle{}      \\
 
   Pembimbing        & : & 1. \advisor{}   \\
-                    &   & 2. \coadvisor{} \\
+  \\
 \end{tabularx}
 \endgroup
 
 % Ubah paragraf berikut dengan abstrak dari tugas akhir
-Pada penelitian ini kami mengajukan \lipsum[1]
+Framework pemrosesan data skala besar seperti \textit{Apache Spark} telah memungkinkan \textit{developer} untuk memproses petabyte data dengan aplikasi \textit{Data-Intensive Scalable Computing (DISC)}. Seperti halnya perangkat lunak lainnya, kesalahan dalam aplikasi \textit{DISC} adalah hal yang umum. Kesalahan tersebut dapat timbul karena dataset input yang tidak bersih atau implementasi aplikasi, yang membuat \textit{developer} harus mengidentifikasi akar penyebab di antara miliaran data input. Proses \textit{Data Provenance} dan \textit{debugging} otomatis memerlukan instrumentasi aplikasi \textit{DISC} atau melakukan \textit{search-based fault isolation} yang memakan banyak sumber daya.
+
+Penelitian ini bertujuan untuk menunjukkan potensi penggunaan \textit{language model} untuk menghasilkan dataset input minimal namun dapat mereproduksi kesalahan yang sama seperti yang diamati pada data masukan skala besar aslinya. Kami membuat \textit{FISUM} (\textit{Fault-inducing Inputs Summarization}), yang melatih model dengan \textit{faulty input} secara historis untuk menghasilkan baris salah baru yang minimal. \textit{FISUM} menggunakan \textit{Data Provenance Engine} yang dibangun untuk \textit{Apache Spark}, untuk memulihkan input yang menyebabkan kesalahan. Kemudian melatih sebuah \textit{lightweight language model}, \textit{DistilGPT}, menggunakan input yang menyebabkan kegagalan ini untuk menghasilkan input minimal yang mengungkapkan kesalahan yang sama.
+
+Pada percobaan dengan aplikasi \textit{DISC} bermasalah yang telah ada, bahkan dengan model ringan, \textit{FISUM} secara efektif dapat merangkum input yang menyebabkan kesalahan, mengurangi input asli dari alat \textit{data provenance} sebesar 99\%, namun masih dapat menyebabkan kesalahan yang sama. \textit{FISUM} menghasilkan \textit{faulty input} dalam waktu kurang dari 50 milidetik per baris, rata-rata.
 
 % Ubah kata-kata berikut dengan kata kunci dari tugas akhir
-Kata Kunci: Roket, \emph{Anti-gravitasi}, Energi, Angkasa.
+Kata Kunci: \emph{Debugging}, \emph{Generative AI}, \emph{Faults}, \emph{Language Models}.
