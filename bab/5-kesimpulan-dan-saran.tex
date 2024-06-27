@@ -6,29 +6,82 @@
 \section{Kesimpulan}
 \label{sec:kesimpulan}
 
-Berdasarkan hasil pengujian yang \lipsum[1][1-3] sebagai berikut:
+Dalam penelitian ini, kami memperkenalkan FISUM, 
+sebuah alat peringkasan input yang menyebabkan 
+kesalahan yang dapat mereproduksi kesalahan aplikasi 
+DISC dengan baris data yang jauh lebih sedikit dibandingkan 
+dengan teknologi saat ini. Dari hasil penelitian ini,
+kami dapat menyimpulkan beberapa hal sebagai berikut:
+% make enumerate nolistsep
+% - Kemampuan Deteksi Kesalahan: Pada 14 dari 16 program benchmark, FISUM mampu mereproduksi kesalahan asli dalam ≤ 1% dari ukuran input yang menyebabkan kesalahan asli yang dikembalikan oleh Titian. Ini menunjukkan bahwa input bermasalah yang dihasilkan oleh FISUM masih mempertahankan kemampuan deteksi kesalahan yang tinggi.
+
+% - Pengurangan Input Bermasalah: FISUM berhasil merangkum input yang menyebabkan kesalahan menjadi 1% dari input asli yang menyebabkan kesalahan pada sebagian besar program benchmark. Ini menunjukkan bahwa FISUM mampu menghasilkan persentase pengurangan input bermasalah yang signifikan dari dataset yang diberikan.
+
+% - Waktu Pembuatan Data: Hasil eksperimen menunjukkan bahwa FISUM dapat menghasilkan ringkasan input bermasalah dengan waktu yang efisien. Misalnya, dalam program Movie Rating, FISUM membutuhkan hanya 60 milidetik untuk menghasilkan satu baris, menghasilkan total 0,3 detik untuk menghasilkan ringkasan 1% dari input yang menyebabkan kesalahan.
+
+% - Waktu Pelatihan Model: Waktu pelatihan model menggunakan FISUM bervariasi tergantung pada program, dengan waktu terlama adalah 13,5 ribu detik pada Program 16, Word Count, dan waktu terpendek adalah 103 detik pada Program 2, Commute Type. Ini menunjukkan bahwa FISUM memerlukan waktu yang berbeda-beda untuk melatih tiap model, namun tetap dalam batas yang dapat diterima untuk debugging lokal yang interaktif.
 
 \begin{enumerate}[nolistsep]
 
-  \item Pembuatan \lipsum[2][1-3]
-
-  \item \lipsum[2][4-6]
-
-  \item \lipsum[2][7-10]
+  \item \textbf{Kemampuan Deteksi Kesalahan:} 
+  Pada 14 dari 16 program benchmark, 
+  FISUM mampu mereproduksi dataset bermasalah
+  dengan baris dataset sebanyak $\approx 1\%$ dari ukuran 
+  dataset asli yang menyebabkan kesalahan yang
+  dikembalikan oleh Titian. Ini menunjukkan bahwa input 
+  bermasalah yang dihasilkan oleh FISUM masih 
+  mempertahankan kemampuan deteksi kesalahan yang tinggi
+  dengan tingkat akurasi 99\%.
+  \item \textbf{Pengurangan Input Bermasalah:} 
+  FISUM berhasil merangkum dataset yang menyebabkan 
+  kesalahan menjadi 1\% dari dataset asli yang menyebabkan 
+  kesalahan pada sebagian besar program \emph{benchmark}. 
+  Ini menunjukkan bahwa FISUM mampu menghasilkan persentase 
+  pengurangan input bermasalah yang signifikan dari 
+  dataset yang diberikan.
+  \item \textbf{Waktu Pembuatan Data:} 
+  Hasil penelitian menunjukkan bahwa FISUM dapat 
+  menghasilkan ringkasan input bermasalah dengan 
+  waktu yang efisien. Misalnya, dalam program 
+  \emph{Movie Rating}, FISUM membutuhkan hanya 
+  60 milidetik untuk menghasilkan satu baris data, 
+  dengan total 0,3 detik untuk menghasilkan dataset baru
+  sebanyak 1\% dari input yang menyebabkan kesalahan
+  dengan tetap mempertahankan retensi kesalahan.
+  \item \textbf{Waktu Pelatihan Model:} 
+  Waktu pelatihan model menggunakan FISUM bervariasi 
+  tergantung pada program, dengan waktu terlama 
+  adalah 13,5 ribu detik pada Program \#16, 
+  \emph{Word Count}, dan waktu terpendek adalah 
+  103 detik pada Program \#2, \emph{Commute Type}. 
+  Ini menunjukkan bahwa FISUM memerlukan waktu yang 
+  berbeda-beda untuk melatih tiap model, namun tetap 
+  dalam batas yang dapat diterima untuk debugging 
+  lokal yang interaktif.
 
 \end{enumerate}
+
 
 \section{Saran}
 \label{chap:saran}
 
-Untuk pengembangan lebih lanjut pada \lipsum[1][1-3] antara lain:
+Untuk pengembangan lebih lanjut pada penelitian ini,
+beberapa saran yang dapat dilakukan antara lain:
 
 \begin{enumerate}[nolistsep]
 
-  \item Memperbaiki \lipsum[2][1-3]
-
-  \item \lipsum[2][4-6]
-
-  \item \lipsum[2][7-10]
+    \item \textbf{Percobaan dengan Menggunakan GPU:}
+    Melakukan percobaan menggunakan GPU dapat meningkatkan
+    kecepatan pemrosesan dan pelatihan model FISUM. Dengan
+    menggunakan GPU, kita dapat mengevaluasi sejauh mana
+    peningkatan performa yang dapat dicapai dibandingkan
+    dengan penggunaan laptop standar tanpa GPU.
+    \item \textbf{Eksplorasi dengan Model Bahasa yang Lebih Modern:}
+    Menggali penggunaan model bahasa yang lebih modern dan
+    canggih dapat meningkatkan kecepatan dan ketepatan FISUM
+    dalam merangkum input yang menyebabkan kesalahan. Namun,
+    penting untuk tetap memperhatikan ukuran dari model
+    tersebut agar tidak terlalu besar dan tetap efisien dalam
+    penggunaannya pada data skala besar.
 
 \end{enumerate}
