@@ -9,7 +9,7 @@
   \centering
 
   % Ubah dengan nama file gambar dan ukuran yang akan digunakan
-  \includegraphics[scale=0.35]{gambar/roketluarangkasa.jpg}
+  \includegraphics[scale=0.17]{gambar/StateOfTheArt.jpg}
 
   % Ubah dengan keterangan gambar yang diinginkan
   \caption{Diagram \emph{Fishbone}}
@@ -52,10 +52,33 @@ Untuk dapat memisahkan antara data benar dan data yang bermasalah akan digunakan
 
 Selain itu, untuk dapat mengganti data yang bermasalah dengan data yang benar, akan digunakan sebuah model yang disediakan oleh HugginFace. HuggingFace adalah sebuah perusahaan yang dikenal sebagai pemimpin dalam bidang pemrosesan bahasa alami (Natural Language Processing, NLP). Misi inti mereka adalah membuat teknologi NLP yang kuat dan canggih lebih mudah diakses oleh para peneliti, ilmuwan data, pengembang, dan perusahaan [12]. Salah satu kontribusi utama HuggingFace adalah penyediaan berbagai model NLP "state-of-the-art" yang telah dilatih dengan data besar, seperti model BERT, DistilBert, GPT-2, DistilGPT2, dan banyak lagi. Model-model ini sangat kuat dan dapat digunakan dalam berbagai tugas, seperti penerjemahan bahasa, analisis sentimen, generate teks otomatis, dan pemahaman bahasa alami [13]. Selain itu, HuggingFace juga menyediakan API yang mempermudah penggunaan model NLP tersebut. Mereka juga mengembangkan alat-alat dan perpustakaan (library) yang mendukung pengembangan dan penelitian di bidang NLP [14]. Dengan demikian, HuggingFace berperan penting dalam memperluas akses ke teknologi NLP canggih, memungkinkan inovasi di berbagai industri, termasuk pemrosesan teks, layanan pelanggan, penelitian akademik, dan banyak lagi [15].
 
-DistilGPT2 Model dipilih sebagai model yang akan digunakan pada penelitian ini. DistilGPT2 adalah model NLP yang dikembangkan oleh HuggingFace, yang merupakan versi ringan (distil) dari model GPT-2 (Generative Pre-trained Transformer 2). Keunggulan DistilGPT2 terletak pada efisiensi komputasi, membuatnya sangat cocok untuk aplikasi yang membutuhkan pemrosesan teks cepat dalam skala besar. DistilGPT2 mempertahankan arsitektur dasar GPT-2 dengan lapisan dan parameter lebih sedikit, membuatnya lebih ringan dan cepat. Meskipun lebih kecil, DistilGPT2 mampu menghasilkan teks dengan baik dan cocok untuk aplikasi NLP pada perangkat dengan sumber daya terbatas. Hasil evaluasi menunjukkan bahwa DistilGPT2 memiliki performa yang kompetitif dan efisien. Hal ini membuat DistilGPT2 menjadi pilihan yang menarik dalam pengembangan aplikasi yang bergantung pada analisis teks dengan kecepatan dan efisiensi [6].
+DistilGPT2 Model dipilih sebagai model yang akan digunakan pada 
+penelitian ini. DistilGPT2 adalah model NLP yang dikembangkan oleh 
+HuggingFace, yang merupakan versi ringan (distil) dari model 
+\emph{GPT-2 (Generative Pre-trained Transformer 2)}. Keunggulan 
+DistilGPT2 terletak pada efisiensi komputasi, membuatnya sangat 
+cocok untuk aplikasi yang membutuhkan pemrosesan teks cepat dalam 
+skala besar. DistilGPT2 mempertahankan arsitektur dasar GPT-2 dengan 
+lapisan dan parameter lebih sedikit, membuatnya lebih ringan dan cepat. 
+Meskipun lebih kecil, DistilGPT2 mampu menghasilkan teks dengan baik 
+dan cocok untuk aplikasi NLP pada perangkat dengan sumber daya 
+terbatas. Hasil evaluasi menunjukkan bahwa DistilGPT2 memiliki 
+performa yang kompetitif dan efisien. Hal ini membuat DistilGPT2 
+menjadi pilihan yang menarik dalam pengembangan aplikasi yang 
+bergantung pada analisis teks dengan kecepatan dan efisiensi [6]. 
+DistilGPT2 terdiri dari 6 lapisan, 768 dimensi, dan 12 juta parameter.
+Arsitektur DistilGPT2 dapat dilihat pada Gambar 
+\ref{fig:distilgpt2Architecture}.
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[scale=0.5]{gambar/DistilledGPT2Architecture.png}
+  \caption{Arsitektur DistilGPT2}
+  \label{fig:distilgpt2Architecture}
+\end{figure}
 
 Untuk dapat menghubungkan antara DistilGPT2 Model dan program DISC yang menggunakan Titian, penelitian ini akan memanfaatkan FastAPI. FastAPI adalah kerangka kerja web Python yang dikenal dengan kinerja tinggi, kemudahan pengembangan, dan otomatisasi pembuatan dokumentasi API. Dibangun di atas Python 3.6+ yang mendukung asynchronous programming, FastAPI dapat menangani banyak permintaan dengan cepat. Kerangka kerja ini menggunakan teknologi seperti Starlette dan Pydantic untuk memastikan penanganan permintaan HTTP yang efisien dan validasi data yang kuat [17]. Hingga kini FastAPI telah banyak dimanfaatkan untuk keperluan machine learning dan data science dan terbukti 45% jauh lebih baik dibandingkan dengan Flask [18]. Flask adalah framework web Python yang ringan dan fleksibel yang menekankan kesederhanaan dan kemampuan untuk diperluas. Ini menyediakan fitur dasar untuk pengembangan web dan memungkinkan pengembang memilih dan mengintegrasikan ekstensi berdasarkan kebutuhan proyek mereka [19].
 
-DistilGPT2 Model yang ditanamkan ke dalam FastAPI kemudian akan di-deploy menggunakan Amazon Web Service (AWS) EC2. AWS adalah platform komputasi awan yang dikelola oleh Amazon. AWS menyediakan berbagai layanan komputasi, penyimpanan, database, jaringan, dan lainnya yang dapat digunakan oleh perusahaan dan pengembang untuk menjalankan aplikasi mereka di lingkungan awan. Amazon EC2 adalah salah satu layanan inti di AWS yang memungkinkan pengguna untuk menyewa mesin virtual (instance) di cloud. Pengguna dapat memilih berbagai jenis instance yang sesuai dengan kebutuhan mereka, seperti instance berkinerja tinggi, instance berbasis GPU, atau instance berbiaya rendah. AWS EC2 memungkinkan pengguna untuk dengan cepat meluncurkan, mengelola, dan menghentikan instance sesuai kebutuhan, sehingga mereka dapat mengskalakan aplikasi mereka sesuai dengan permintaan dan menghemat biaya saat instance tidak digunakan [20]. Dibandingkan dengan kompetitornya, AWS EC2 menawarkan solusi yang lebih baik di mana pengguna dapat memiliki kesempatan untuk memilih fitur yang diinginkan sesuai kebutuhan [21]. 
+DistilGPT2 Model yang ditanamkan ke dalam FastAPI kemudian akan di-deploy menggunakan Amazon Web Service (AWS) EC2. AWS adalah platform komputasi awan yang dikelola oleh Amazon. AWS menyediakan berbagai layanan komputasi, penyimpanan, database, jaringan, dan lainnya yang dapat digunakan oleh perusahaan dan pengembang untuk menjalankan aplikasi mereka di lingkungan awan. Amazon EC2 adalah salah satu layanan inti di AWS yang memungkinkan pengguna untuk menyewa mesin virtual (instance) di cloud. Pengguna dapat memilih berbagai jenis instance yang sesuai dengan kebutuhan mereka, seperti instance berkinerja tinggi, instance berbasis GPU, atau instance berbiaya rendah. AWS EC2 memungkinkan pengguna untuk dengan cepat meluncurkan, mengelola, dan menghentikan instance sesuai kebutuhan, sehingga mereka dapat mengskalakan aplikasi mereka sesuai dengan permintaan dan menghemat biaya saat instance tidak digunakan [20]. Dibandingkan dengan kompetitornya, AWS EC2 menawarkan solusi yang lebih baik di mana pengguna dapat memiliki kesempatan untuk memilih fitur yang diinginkan sesuai kebutuhan [21].
 
 Pengembangan sistem akan menggunakan 2 bahasa pemrograman. Pada proses training awal model dan pembuatan FastAPI, bahasa pemrograman yang akan digunakan adalah Python. Sedangkan pada pembuatan sistem yang akan mengonsumsi FastAPI, bahasa pemrograman yang akan digunakan adalah Scala. Python dipilih untuk proses training awal model dan pembuatan FastAPI karena memiliki sintaksis yang mudah dipahami, ekosistem yang kaya, serta banyak library dan framework yang mendukung pengembangan aplikasi machine learning dan web termasuk HuggingFace. Kelebihan Python dalam kesederhanaan dan kemudahan penggunaan membuatnya menjadi pilihan utama dalam fase awal pengembangan [22]. Sementara itu, Scala dipilih untuk pembuatan sistem yang mengonsumsi FastAPI karena Scala menawarkan keunggulan dalam hal konkurensi dan eksekusi paralel, yang dapat meningkatkan kinerja sistem secara signifikan. Pemilihan Scala juga didorong oleh keandalan dan ekosistem yang mapan, terutama dalam pengembangan aplikasi berukuran besar [23]. Dibandingkan dengan Java pada bidang Natural Language Processing (NLP), Scala dianggap lebih unggul karena ekosistemnya yang lebih modern dan fitur-fitur fungsional yang dapat mempermudah pengembangan aplikasi NLP [24]. Scala memungkinkan penggunaan paradigma fungsional yang mendukung pemrosesan data kompleks dan manipulasi struktur data dengan lebih efisien, sehingga menjadi pilihan yang tepat untuk tugas-tugas kompleks dalam NLP [25].

@@ -18,7 +18,7 @@ Dalam penelitian ini, kami mengusulkan teknik berbasis \emph{large language mode
 
 Teknik kami memerlukan proses \emph{pre-training} dari model GPT versi ringan, distilGPT, pada seluruh data input. Langkah \emph{unsupervised} ini memungkinkan model untuk mempelajari struktur dasar dan pola dari data tersebut. Kami kemudian menggunakan Titian untuk mengambil subset besar dari input yang dianggap mencurigakan terkait dengan eksekusi yang salah. distilGPT kemudian dilatih ulang pada data mencurigakan ini untuk membiasakannya dalam menghasilkan input yang menyebabkan kesalahan. Akhirnya, distilGPT diarahkan untuk menghasilkan data yang dapat mereproduksi kesalahan tersebut.
 
-Untuk mengevaluasi teknik kami, kami menggunakan satu set program \emph{ \emph{benchmark}} dari penelitian sebelumnya tentang debugging dan pengujian aplikasi DISC. Eksperimen kami pada program \emph{benchmark} ini menunjukkan bahwa FISUM, bahkan dengan model versi ringan seperti DistilGPT, dapat secara efektif merangkum input yang menyebabkan kesalahan. Ini mengurangi input asli yang menyebabkan kesalahan dari alat \emph{provenans} data sebesar rata-rata 99\%, sambil tetap menyebabkan pola kesalahan yang sama. Saat menghasilkan input bermasalah dalam jumlah minimal, FISUM menghasilkan setiap baris data dalam waktu rata-rata kurang dari 50 milidetik.
+% Untuk mengevaluasi teknik kami, kami menggunakan satu set program \emph{ \emph{benchmark}} dari penelitian sebelumnya tentang debugging dan pengujian aplikasi DISC. Eksperimen kami pada program \emph{benchmark} ini menunjukkan bahwa FISUM, bahkan dengan model versi ringan seperti DistilGPT, dapat secara efektif merangkum input yang menyebabkan kesalahan. Ini mengurangi input asli yang menyebabkan kesalahan dari alat \emph{provenans} data sebesar rata-rata 99\%, sambil tetap menyebabkan pola kesalahan yang sama. Saat menghasilkan input bermasalah dalam jumlah minimal, FISUM menghasilkan setiap baris data dalam waktu rata-rata kurang dari 50 milidetik.
 
 \section{Rumusan Permasalahan}
 \label{sec:permasalahan}
@@ -27,9 +27,13 @@ Berdasarkan latar belakang di atas, maka dapat ditarik rumusan masalah sebagai b
 
 \begin{enumerate}[nolistsep]
 
-   \item Bagaimana sistem yang diusulkan dapat menemukan dataset input masalah pada aplikasi DISC?
+   \item Apakah input yang bermasalah yang dihasilkan oleh FISUM masih mempertahankan kemampuan deteksi kesalahan?
 
-   \item Bagaimana sistem yang diusulkan dapat merangkum dataset input penyebab masalah pada aplikasi DISC seminimal mungkin?
+   \item Berapa banyak persentase pengurangan input bermasalah yang dapat dihasilkan oleh FISUM dari dataset yang diberikan?
+
+   \item Berapa lama waktu yang dibutuhkan untuk menghasilkan input bermasalah oleh FISUM?
+   
+   \item Berapa lama waktu yang dibutuhkan untuk melatih tiap model dengan FISUM?
 
 \end{enumerate}
 
@@ -57,9 +61,10 @@ Tujuan penelitian ini adalah sebagai berikut:
 
 \begin{enumerate}[nolistsep]
 
-  \item Menemukan data input yang menjadi penyebab masalah pada aplikasi DISC
-
-  \item Merangkum dataset input penyebab masalah pada aplikasi DISC seminimal mungkin.
+  \item Mengevaluasi kemampuan deteksi kesalahan dari input bermasalah yang dihasilkan oleh FISUM.
+  \item Mengukur persentase pengurangan input bermasalah yang dihasilkan oleh FISUM dari dataset yang diberikan.
+  \item Mengukur waktu yang dibutuhkan untuk menghasilkan input bermasalah oleh FISUM.
+  \item Mengukur waktu yang dibutuhkan untuk melatih tiap model dengan FISUM.
 
 \end{enumerate}
 

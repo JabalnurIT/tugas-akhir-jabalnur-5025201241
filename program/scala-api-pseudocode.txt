@@ -1,0 +1,43 @@
+percentageOutput = [1, 2, 5, 10, 25, 50]
+
+// USE-MODEL
+useModelStatus = useModelRequest(appName)
+
+// GET-MODEL-LIST
+currentModel, modelList = getModelListRequest()
+
+if useModelStatus != "Success":
+    system.terminate()
+    
+allData = fileToList("$path/$appName/all_data.csv")
+
+// RETRAIN (random_data)
+retrainStatus = retrainRequest(join(pickRandom(allData), "###"))
+
+faultyData = fileToList("$path/$appName/incorrect_data.csv")
+
+// RETRAIN(faulty_data)
+retrainStatus = retrainRequest(join(faultyData, "###"))
+
+if retrainStatus != "Success":
+    system.terminate()
+    
+// GENERATE-INPUT
+forEach (percentage in percentageOutput):
+    numRow = percentage / 100 * length(allData)
+    newDataset = generateInputRequest(numRow)
+    saveToFile("$path/$appName/$numRow.csv", newDataset)
+
+// RESET-MODEL (optional)
+resetModelStatus = resetModelRequest()
+
+if resetModelStatus != "Success":
+    system.terminate()
+
+// DELETE-MODEL (optional)
+deleteModelStatus = deleteModelRequest()
+
+if deleteModelStatus != "Success":
+    system.terminate()
+            
+system.terminate()

@@ -8,7 +8,7 @@ Metode yang dirancang pada penelitian ini sebagaimana ditunjukkan pada Gambar \r
 
 \begin{figure}[H]
   \centering
-  \includegraphics[scale=0.35]{gambar/roketluarangkasa.jpg}
+  \includegraphics[scale=0.4]{gambar/DiagramAlirMetodePenelitian.jpg}
 
   % Ubah dengan keterangan gambar yang diinginkan
   \caption{Diagram Alir Metode Penelitian}
@@ -25,17 +25,9 @@ Metode yang dirancang pada penelitian ini sebagaimana ditunjukkan pada Gambar \r
 
   \item \textbf{Perancangan Arsitektur Sistem}
   
-  \begin{figure}[H]
-    \centering
-    \includegraphics[scale=0.35]{gambar/roketluarangkasa.jpg}
-  
-    % Ubah dengan keterangan gambar yang diinginkan
-    \caption{Rancangan Arsitektur Sistem}
-    \label{fig:arsitektur}
-  \end{figure}
-  
   Tahap perancangan arsitektur sistem pada penelitian ini 
-  dilakukan dengan mengombinasikan dasar teori pada bab 2. 
+  dilakukan dengan mengombinasikan dasar teori dan penelitian 
+  terkait pada Bab \ref{chap:tinjauanpustaka}. 
   Perancangan metode akan dimulai dari proses \emph{pre-training}
   terhadap model DistilGPT2 menggunakan baris dataset random dari 
   dataset masing-masing \emph{benchmark program} yang akan 
@@ -54,6 +46,16 @@ Metode yang dirancang pada penelitian ini sebagaimana ditunjukkan pada Gambar \r
   menghasilkan keluaran yang bermasalah atau tidak.
   Alur keseluruhan proses tersebut dapat dilihat pada 
   Gambar \ref{fig:arsitektur}.
+
+
+  \begin{figure}[H]
+    \centering
+    \includegraphics[scale=0.6]{gambar/RancanganArsitekturSistem.png}
+  
+    % Ubah dengan keterangan gambar yang diinginkan
+    \caption{Rancangan Arsitektur Sistem}
+    \label{fig:arsitektur}
+  \end{figure}
 
   \item \textbf{Perancangan Metode Generate Input}
   
@@ -82,19 +84,11 @@ Metode yang dirancang pada penelitian ini sebagaimana ditunjukkan pada Gambar \r
 % - delete folder current
 % - return status 
   
-  \begin{figure}[H]
-    \centering
-    \includegraphics[scale=0.35]{gambar/roketluarangkasa.jpg}
-  
-    % Ubah dengan keterangan gambar yang diinginkan
-    \caption{Rancangan Metode Generate Input}
-    \label{fig:generateinput}
-
-  \end{figure}
-  
   Tahap perancangan metode generate input dilakukan dengan 
   melakukan proses traning dan re-training terhadap 
-  DistilGPT2 model. Proses ini dilakukan dengan membuat sebuah
+  DistilGPT2 model yang memiliki \emph{hyperparameter} seperti
+  pada Tabel \ref{tab:hyperparameter}.
+  Proses ini dilakukan dengan membuat sebuah
   API dengan menggunakan FastAPI yang dapat diakses oleh pengguna. 
   API ini akan memiliki beberapa endpoint yang dapat digunakan 
   oleh pengguna untuk melakukan proses \emph{generate input} baru, 
@@ -103,36 +97,75 @@ Metode yang dirancang pada penelitian ini sebagaimana ditunjukkan pada Gambar \r
   dan \emph{cloud} milik Amazon Web Service (AWS).
   Tahap ini dapat ditunjukkan melalui Gambar \ref{fig:generateinput}.
 
+  
+  \begin{table}[H]
+    \centering
+    \caption{Tabel \emph{hyperparameter} model DistilGPT2}
+    \begin{tabular}{|p{0.25\linewidth}|p{0.25\linewidth}|}
+      \hline
+      \textbf{Hyperparameter} & \textbf{Nilai} \\
+      \hline
+      \raggedright \texttt{learning\_rate} & 5e-4 \\
+      \hline
+      \raggedright \texttt{warmup\_steps} & 1e2 \\
+      \hline
+      \raggedright \texttt{epsilon} & 1e-8 \\
+      \hline
+      \raggedright \texttt{batch\_size} & 2 \\
+      \hline
+      \raggedright \texttt{epochs} & 10 \\
+      \hline
+    \end{tabular}
+    
+    \label{tab:hyperparameter}
+  \end{table}
+
+
+  \begin{figure}[H]
+    \centering
+    \includegraphics[scale=0.5]{gambar/RancanganMetodeGenerateInput.png}
+  
+    % Ubah dengan keterangan gambar yang diinginkan
+    \caption{Rancangan Metode Generate Input}
+    \label{fig:generateinput}
+
+  \end{figure}
+  
   \item \textbf{Pengembangan Sistem}
   
-  % SALAH
-  % Pengembangan sistem dilakukan dengan menerapkan algoritma 
-  % solusi yang dirancang pada subbab perancangan arsitektur 
-  % sistem dan perancangan metode generate input. Untuk API 
-  % yang dihasilkan pada perancangan metode generate input 
-  % akan menggunakan bahasa pemrograman python, sedangkan 
-  % untuk sistem secara keseluruhan akan menggunakan bahasa 
-  % pemrograman Scala. Kode program penelitian ini dirancang 
-  % untuk dapat dipasangkan ke sebuah program yang merupakan 
-  % program target dilakukannya proses debugging dan generate 
-  % test input di sistem DISC Apache Spark. Pada saat program 
-  % target tersebut dijalankan, program pada penelitian ini akan 
-  % memonitor data input, melakukan re-training model terhadap 
-  % data yang benar, dan akan melakukan proses generate test 
-  % input baru untuk menggantikan test input yang bermasalah. 
-
-  % BENAR
   Pengembangan sistem dilakukan dengan menerapkan algoritma
   solusi yang dirancang pada subbab perancangan arsitektur
   sistem dan perancangan metode generate input. Untuk API
   yang dihasilkan pada perancangan metode generate input
   akan menggunakan bahasa pemrograman python, sedangkan
   untuk sistem secara keseluruhan akan menggunakan bahasa
-  pemrograman Scala. 
+  pemrograman Scala. Untuk masing-masing \emph{benchmark program}
+  yang parameter programnya sudah diatur dan telah ditanamkan
+  \emph{provenance engine} Titian, akan membuat model baru 
+  pada server menggunakan FastAPI berdasarkan \emph{Base Model} 
+  yang disediakan. Setelah itu, program tersebut akan melakukan 
+  proses \emph{re-training} dan \emph{generate input} baru melalui 
+  API tersebut.
 
   \item \textbf{Analisis Kinerja Sistem}
-  
-  Analisis kinerja sistem yang akan dilakukan pada penelitian ini ada dua, yaitu yaitu pada proses pemisahan dataset dan pada proses generate dataset baru. Analisis kinerja sistem pada proses pemisahan dataset dilakukan dengan menghitung nilai accuracy pada sejumlah program yang akan ditargetkan di mana masing-masing datasetnya akan dilabeli dari awal antara data yang benar dan data yang bermasalah. Untuk analasis kinerja sistem pada proses generate dataset baru dilakukan dengan menghitung persentase dataset benar yang berhasil digenarate oleh model ditiap iterasinya. Proses penentuan apakah dataset baru benar atau bermasalah akan dilakukan secara manual dengan melihat dataset yang telah ada.
+  % - Does the summarized faulty input from FISUM retain the
+  % fault detection capability?
+  % - How much reduction in faulty input can FISUM provide?
+  % - How long does it take to generate summarized faulty
+  % inputs?
+  % - How long does it take to train an application-specific
+  % model by FISUM?
+  Analisis kinerja sistem yang akan dilakukan pada penelitian 
+  ini ada dua, yaitu tingkat akurasi dan waktu yang dibutuhkan. 
+  Terdapat dua poin yang akan diuji pada bagian akurasi yaitu 
+  dilakukan dengan membandingkan hasil dari dataset yang tetap 
+  mempertahankan kesalahan atau tidak, dan berapa persentase
+  jumlah dataset yang berhasil digenerate oleh model untuk
+  mereproduksi kesalahan tersebut. Sedangkan pada bagian waktu
+  yang dibutuhkan, dilakukan dengan menghitung waktu yang
+  dibutuhkan untuk menghasilkan sejumlah dataset yang bermasalah 
+  tersebut, dan berapa persentase waktu yang dibutuhkan untuk
+  melakukan \emph{re-training} model pada dataset tersebut.
 
   \item \textbf{Penyusunan Laporan Tugas Akhir}
   
@@ -183,10 +216,11 @@ kerja teknik kami. Teknik ini dimulai
 dengan penyesuaian awal arsitektur \emph{generative LLM} yang 
 sudah dilatih sebelumnya menggunakan sampel acak dari data. 
 LLM ini di-host di server langsung dan diakses melalui API 
-khusus yang dijelaskan di Tabel \ref{tab:api}. Ketika ditemukan eksekusi 
-program yang salah, penelitian kami menggunakan Titain, sebuah 
+khusus yang dijelaskan pada Tabel \ref{tab:api}.
+Ketika ditemukan eksekusi program yang salah, 
+penelitian kami menggunakan Titain, sebuah 
 \emph{provenance engine}, untuk mendapatkan serangkaian baris yang 
-mencurigakan. Sampel data yang dilatih ini memiliki 
+mencurigakan. Sampel data yang dilatih ini  memiliki 
 persentase lebih tinggi dari baris yang menyebabkan kesalahan, 
 yang kemudian digunakan untuk lebih menyesuaikan generative 
 LLM, sehingga model ini mempelajari pola dasar dari input yang 
@@ -200,23 +234,32 @@ yang perlu dilakukan sesuai pada gambar \ref{fig:diagram alir implementasi}
 
 \begin{figure}[H]
   \centering
-  \includegraphics[scale=0.35]{gambar/roketluarangkasa.jpg}
+  \includegraphics[scale=0.25]{gambar/AlurKerjaTeknik.png}
 
   % Ubah dengan keterangan gambar yang diinginkan
   \caption{Alur Kerja Teknik}
   \label{fig:alur kerja teknik}
 \end{figure}
 
+
 \begin{table}[H]
   \centering
   \caption{Tabel API}
-  \begin{tabular}{|c|c|}
+  \begin{tabular}{|p{0.18\linewidth}|p{0.25\linewidth}|p{0.17\linewidth}|p{0.28\linewidth}|}
     \hline
-    \textbf{API} & \textbf{Deskripsi} \\
+    \textbf{API} & \textbf{Deskripsi} & \textbf{Request Value}  & \textbf{Response Value} \\
     \hline
-    \texttt{GET /generate} & Menghasilkan input yang menyebabkan kesalahan \\
+    \raggedright \texttt{POST /list-model} &\raggedright Menampilkan model yang terpakai dan tersedia & - &  current\_model, model\_list \\
     \hline
-    \texttt{POST /retrain} & Melatih model dengan data yang benar \\
+    \raggedright \texttt{POST /use-model} &\raggedright Mengganti model yang terpakai & model\_name & status \\
+    \hline
+    \texttt{POST /retrain} &\raggedright Melatih ulang model & dataset & status \\
+    \hline
+    \raggedright \texttt{POST /generate} &\raggedright Menghasilkan input yang menginduksi kesalahan & num\_row & list\_of\_generated\_row \\
+    \hline
+    \texttt{POST /reset} &\raggedright Mengembalikan model ke model dasar & - & status \\
+    \hline
+    \texttt{POST /delete} &\raggedright Menghapus model yang terpakai & - & status \\
     \hline
   \end{tabular}
   \label{tab:api}
@@ -224,7 +267,7 @@ yang perlu dilakukan sesuai pada gambar \ref{fig:diagram alir implementasi}
 
 \begin{figure}[H]
   \centering
-  \includegraphics[scale=0.35]{gambar/roketluarangkasa.jpg}
+  \includegraphics[scale=0.8]{gambar/DiagramAlirRencanaImplementasiDanUjiCoba.png}
 
   % Ubah dengan keterangan gambar yang diinginkan
   \caption{Diagram Alir Rencana Implementasi dan Uji Coba}
@@ -239,18 +282,18 @@ seperti Titian untuk mendapatkan sampel input yang bias
 terhadap baris-baris yang menginduksi kesalahan dalam eksekusi 
 program tertentu. Ketika analis data mengeksekusi program 
 dengan data asli, alat kami menggunakan \emph{API call} 
-{\tt LLM\_pretrain(orig\_data\_path)} untuk memberikan data 
+{\tt retrain(orig\_dataset)} untuk memberikan data 
 awal ke server \emph{LLM}. Tujuan dari data ini adalah untuk 
 membiasakan \emph{LLM} dengan format dan skema data. 
 Perlu dicatat bahwa karena \emph{LLM} menggunakan 
-\emph{pre-trained weights} dari GPT-2, tidak diperlukan 
+\emph{pre-trained weights} dari DistilGPT2, tidak diperlukan 
 sejumlah besar data untuk dapat menghasilkan baris dengan 
 format yang diharapkan. Akibatnya, waktu pelatihan untuk 
 langkah ini relatif singkat.
 
 Ketika eksekusi program menghasilkan keluaran yang 
 mencurigakan, analis dapat menentukan aturan filter 
-menggunakan \emph{Titian's API} untuk mengidentifikasi 
+menggunakan Titian untuk mengidentifikasi 
 kemungkinan penyebab keluaran yang salah. Data penyebab 
 yang dikembalikan oleh Titian bisa sangat besar sehingga 
 tidak mungkin dianalisis oleh pengembang manusia, misalnya, 
@@ -258,21 +301,57 @@ hingga jutaan baris. Wawasan kami adalah bahwa meskipun data
 penyebabnya besar, inti dari kesalahan dapat ditangkap dalam 
 beberapa baris saja. Model bahasa modern adalah alat yang 
 berguna untuk menangkap pola-pola yang menginduksi kesalahan 
-dari sampel bias yang dikembalikan oleh Titian.
+dari sampel bias yang dikembalikan oleh Titian. 
+Alur kerja penggunaan Titian pada \emph{benchmark program}
+dapat dilihat pada Gambar \ref{fig:diagramofprogramwithtitian}.
 
-\subsection{Melatih Model Bahasa Pembangkitan Input yang Menginduksi Kesalahan Secara Offline}
+\begin{figure}[H]
+  \centering
+  \includegraphics[scale=0.75]{gambar/DiagramOfProgramWithTitian.png}
+
+  % Ubah dengan keterangan gambar yang diinginkan
+  \caption{Diagram Alur Kerja Program dengan Titian}
+  \label{fig:diagramofprogramwithtitian}
+\end{figure}
+
+\subsection{Melatih Model Bahasa Pembangkitan Input yang Menginduksi Kesalahan}
 \label{sec:melatih model}
 
 Setelah sekumpulan baris potensial yang menyebabkan keluaran 
 yang salah diperoleh, alat kami menggunakan \emph{API call} 
-{\tt LLM\_pretrain(faulty\_sample)} untuk melatih ulang model 
+{\tt retrain(faulty\_sample)} untuk melatih ulang model 
 dengan data yang dicurigai dan membiasakannya untuk 
 menghasilkan input yang menginduksi kesalahan. \emph{LLM} 
 mengambil baris-baris ini dan menerapkan proses pelatihan 
 awal sekali lagi menggunakan baris-baris yang salah yang 
-disediakan.
+disediakan. 
 
-\subsection{Pembuatan Input yang Menginduksi Kesalahan secara Ringkas}
+% API endpoint
+% list-model()
+% - return (current_model, model_list)
+
+% use-model(model_name)
+% - change current
+% —if(not in list)
+% 	- make new from base
+% - return status
+
+% retrain(all_data)
+% - retrain the model
+% - return status
+
+% generate(num_row)
+% - return list_of_generated_row
+
+% reset()
+% - reset the current from base
+% - return status
+
+% delete()
+% - delete folder current
+% - return status
+
+\subsection{Pembuatan \emph{Input} yang Menginduksi Kesalahan secara Ringkas}
 \label{sec:pembuatan input}
 
 Dengan menggunakan model yang bias, alat kami dapat 
@@ -280,20 +359,28 @@ menghasilkan input baru yang menginduksi kesalahan untuk
 mereproduksi gejala kesalahan yang sama dengan data yang 
 jauh lebih sedikit. Karena model yang dilatih adalah 
 \emph{generative LLM}, kami dapat menggunakan 
-\emph{API call} {\tt LLM\_generate(N)} untuk menghasilkan 
+\emph{API call} {\tt generate(N)} untuk menghasilkan 
 N baris data. Idealnya, N yang dibutuhkan untuk mereproduksi 
 kesalahan harus cukup kecil agar mudah dianalisis oleh 
 programmer manusia. Secara analitis, menentukan nilai N 
 sangat sulit, jika tidak bisa dibilang mustahil. Oleh 
 karena itu, alat kami mengambil pendekatan iteratif. 
-Alat ini memulai dengan memanggil {\tt LLM\_generate(1)} 
+Alat ini memulai dengan memanggil {\tt generate(1)} 
 dan mengeksekusi program menggunakan baris yang dihasilkan. 
-Jika gejala kesalahan terproduksi, loop berhenti. Jika tidak, 
+Jika gejala kesalahan terproduksi, \emph{loop} berhenti. Jika tidak, 
 alat ini meningkatkan N secara logaritmik hingga kesalahan 
 terproduksi. Jika alat ini tidak dapat mereproduksi kesalahan 
 dalam jumlah iterasi yang ditentukan oleh pengguna, loop akan 
 dihentikan dan alat melaporkan kegagalan untuk mereproduksi 
-kesalahan.
+kesalahan. \emph{Pseudocode} dari algoritma ini dapat dilihat pada kode
+\ref{lst:scala-api-pseudocode}.
+
+\lstinputlisting[
+  caption={\emph{Pseudocode} penggunaan API pada Scala},
+  label={lst:scala-api-pseudocode}
+]{program/scala-api-pseudocode.txt}
+
+
 
 \subsection{Mengunggah API ke Layanan Cloud}
 \label{sec:mengunggah api}
@@ -316,32 +403,3 @@ yang tinggi. Langkah ini melibatkan konfigurasi server
 \emph{endpoint API} untuk menerima dan memproses permintaan 
 dari pengguna, memungkinkan integrasi yang mulus dengan 
 berbagai sistem dan aplikasi.
-
-% Contoh pembuatan potongan kode
-\begin{lstlisting}[
-  language=C++,
-  caption={Program halo dunia.},
-  label={lst:halodunia}
-]
-#include <iostream>
-
-int main() {
-    std::cout << "Halo Dunia!";
-    return 0;
-}
-\end{lstlisting}
-
-\lipsum[2-3]
-
-% Contoh input potongan kode dari file
-\lstinputlisting[
-  language=Python,
-  caption={Program perhitungan bilangan prima.},
-  label={lst:bilanganprima}
-]{program/bilangan-prima.py}
-
-
-\lstinputlisting[
-  caption={Program perhitungan bilangan prima.},
-  label={lst:contoh-pseudocode}
-]{program/contoh-pseudocode.txt}
