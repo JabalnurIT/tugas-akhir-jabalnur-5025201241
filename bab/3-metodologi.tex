@@ -8,7 +8,7 @@ Metode yang dirancang pada penelitian ini sebagaimana ditunjukkan pada Gambar \r
 
 \begin{figure}[H]
   \centering
-  \includegraphics[scale=0.4]{gambar/DiagramAlirMetodePenelitian.jpg}
+  \includegraphics[scale=0.25]{gambar/DiagramAlirMetodePenelitian.jpg}
 
   % Ubah dengan keterangan gambar yang diinginkan
   \caption{Diagram Alir Metode Penelitian}
@@ -167,25 +167,26 @@ Metode yang dirancang pada penelitian ini sebagaimana ditunjukkan pada Gambar \r
   tersebut, dan berapa persentase waktu yang dibutuhkan untuk
   melakukan \emph{re-training} model pada dataset tersebut.
 
-  \item \textbf{Penyusunan Laporan Tugas Akhir}
-  
-  Tahap ini merupakan tahap akhir dari penelitian ini yaitu penyusunan laporan dalam bentuk buku tugas akhir yang menjelaskan dasar teori dan metode yang digunakan dalam tugas akhir ini serta hasil implementasi yang telah dibuat. Sistematika penulisan buku tugas akhir secara garis besar antara lain:
+  \item \textbf{Mengunggah API ke Layanan \emph{Cloud}}
+  Setelah model telah berhasil dilatih untuk menghasilkan 
+  input yang menginduksi kesalahan dan diuji untuk memastikan 
+  efektivitasnya, langkah selanjutnya adalah mengunggah 
+  \emph{API} ke layanan \emph{cloud}. Mengunggah \emph{API} 
+  ke layanan \emph{cloud} memungkinkan akses yang mudah dan 
+  skalabilitas untuk pengguna di berbagai lokasi. Dengan 
+  menggunakan \emph{API} yang diunggah ke \emph{cloud}, 
+  pengembang dapat mengotomatisasi proses deteksi dan 
+  reproduksi kesalahan tanpa perlu mengelola infrastruktur 
+  secara langsung. Layanan \emph{cloud} juga menyediakan 
+  sumber daya yang diperlukan untuk menangani permintaan 
+  \emph{API} dalam jumlah besar, memastikan bahwa alat 
+  tetap responsif dan efisien bahkan di bawah beban kerja 
+  yang tinggi. Langkah ini melibatkan konfigurasi server 
+  \emph{cloud} untuk menjalankan \emph{LLM} dan mengatur 
+  \emph{endpoint API} untuk menerima dan memproses permintaan 
+  dari pengguna, memungkinkan integrasi yang mulus dengan 
+  berbagai sistem dan aplikasi.
 
-  \begin{enumerate}[topsep=0pt]
-    \item Pendahuluan
-    \begin{enumerate}[topsep=0pt]
-      \item Latar Belakang
-      \item Rumusan Masalah
-      \item Batasan Masalah
-      \item Tujuan
-      \item Manfaat
-    \end{enumerate}
-    \item Tinjauan Pustaka
-    \item Metodologi
-    \item Hasil dan Pembahasan
-    \item Kesimpulan dan Saran
-    \item Daftar Pustaka
-  \end{enumerate}
 \end{itemize}
 
 \section{Peralatan Pendukung}
@@ -195,15 +196,35 @@ Terdapat beberapa peralatan hardware dan software pendukung yang digunakan untuk
 \begin{itemize}[topsep=0pt]
   \item Hardware
   \begin{enumerate}[topsep=0pt]
-    \item Laptop MacBook Pro M2
+    \item Laptop MacBook Pro M2 2022
+    \begin{enumerate}[topsep=0pt]
+      \item Prosesor: Apple M2
+      \item RAM: 8 GB
+      \item Storage: 512 GB
+      \item GPU: Apple M2
+      \item OS: macOS Sonoma
+    \end{enumerate}
   \end{enumerate}
   \item Software
   \begin{enumerate}[topsep=0pt]
-    \item Google Colaboratory
-    \item Visual Studio Code
-    \item IntelliJ IDEA CE
-    \item HuggingFace
-    \item Amazon Web Service EC2
+    \item Google Colaboratory\\
+    Digunakan untuk melakukan pelatihan model \emph{DistilGPT2}
+    \item Visual Studio Code\\
+    Digunakan untuk melakukan pengembangan program FastAPI
+    \item IntelliJ IDEA CE\\
+    Digunakan untuk melakukan pengembangan program Scala
+    \item HuggingFace\\
+    Digunakan untuk mengakses model \emph{DistilGPT2}
+    \item Amazon Web Service EC2\\
+    Digunakan untuk melakukan \emph{deployment} 
+    API ke \emph{cloud}
+  \end{enumerate}
+  \item Sumber Dana
+  \begin{enumerate}[topsep=0pt]
+    \item LPDP\\  
+    Pendaan berasal dari Direktorat Jenderal Pendidikan Tinggi,
+    Kementerian Pendidikan, Kebudayaan, Riset, dan Teknologi
+    melalui beasiswa \emph{research} Garuda ACE
   \end{enumerate}
 \end{itemize}
 \section{Implementasi}
@@ -380,26 +401,57 @@ kesalahan. \emph{Pseudocode} dari algoritma ini dapat dilihat pada kode
   label={lst:scala-api-pseudocode}
 ]{program/scala-api-pseudocode.txt}
 
+Untuk dapat lebih memahami tentang \emph{pseudocode} 
+\ref{lst:scala-api-pseudocode}, kami akan menjelaskan
+beberapa bagian dari \emph{pseudocode} tersebut.
+Pada \textbf{baris 1}, sebuah daftar ('list') bernama 
+'percentageOutput' didefinisikan dengan nilai-nilai 
+persentase yang akan digunakan untuk menentukan ukuran 
+dataset baru yang akan dihasilkan. \textbf{Baris 4} mengirimkan 
+permintaan untuk menggunakan model tertentu yang terkait 
+dengan aplikasi yang ditentukan oleh 'appName'. 
+Status dari permintaan ini disimpan dalam variabel 
+'useModelStatus'. \textbf{Baris 7} mengirimkan permintaan 
+untuk mendapatkan model yang sedang digunakan 
+('currentModel') dan daftar model yang tersedia 
+('modelList'). \textbf{Baris 9-10} mengecek apakah status 
+permintaan untuk menggunakan model adalah "Success". 
+Jika tidak, sistem akan dihentikan. \textbf{Baris 12} membaca 
+semua data dari file 'all\_data.csv' yang berada di 
+\emph{path} tertentu dan menyimpannya dalam variabel 
+'allData'. \textbf{Baris 15} memilih data acak dari 'allData', 
+menggabungkannya dengan pemisah "\#\#\#", dan mengirim 
+permintaan untuk melatih ulang model menggunakan data 
+acak tersebut. Status permintaan pelatihan ulang 
+disimpan dalam variabel 'retrainStatus'. \textbf{Baris 17} 
+membaca data yang salah dari file 'incorrect\_data.csv' 
+yang berada di path tertentu dan menyimpannya dalam 
+variabel 'faultyData'. \textbf{Baris 20} menggabungkan data 
+yang salah dengan pemisah "\#\#\#" dan mengirim 
+permintaan untuk melatih ulang model menggunakan 
+data yang salah tersebut. Status permintaan 
+pelatihan ulang disimpan dalam variabel 'retrainStatus'.
+\textbf{Baris 22-23} mengecek apakah status permintaan pelatihan 
+ulang adalah "Success". Jika tidak, sistem akan dihentikan.
+
+Pada \textbf{baris 26-29}, untuk setiap persentase dalam 
+'percentageOutput', jumlah baris ('numRow') yang 
+sesuai dihitung berdasarkan persentase dari panjang 'allData'. 
+Kemudian, permintaan untuk menghasilkan input baru 
+sebesar 'numRow' dikirimkan dan dataset baru disimpan 
+dalam file dengan nama yang sesuai dengan jumlah baris.
+\textbf{Baris 32} mengirim permintaan untuk mereset model. 
+Status permintaan reset disimpan dalam variabel 
+'resetModelStatus' yang kemudian pada \textbf{baris 34-35}
+dilakukan pengecekan apakah status permintaan 
+reset adalah "Success". Jika tidak, sistem akan dihentikan.
+\textbf{Baris 38} mengirim permintaan untuk menghapus model
+yang sedang digunakan. Status permintaan hapus
+disimpan dalam variabel 'deleteModelStatus' yang
+kemudian pada \textbf{baris 40-41} dilakukan pengecekan apakah
+status permintaan hapus adalah "Success". Jika tidak,
+sistem akan dihentikan. Pada \textbf{baris 43}, sistem akan
+dihentikan setelah semua operasi selesai.
 
 
-\subsection{Mengunggah API ke Layanan Cloud}
-\label{sec:mengunggah api}
 
-Setelah model telah berhasil dilatih untuk menghasilkan 
-input yang menginduksi kesalahan dan diuji untuk memastikan 
-efektivitasnya, langkah selanjutnya adalah mengunggah 
-\emph{API} ke layanan \emph{cloud}. Mengunggah \emph{API} 
-ke layanan \emph{cloud} memungkinkan akses yang mudah dan 
-skalabilitas untuk pengguna di berbagai lokasi. Dengan 
-menggunakan \emph{API} yang diunggah ke \emph{cloud}, 
-pengembang dapat mengotomatisasi proses deteksi dan 
-reproduksi kesalahan tanpa perlu mengelola infrastruktur 
-secara langsung. Layanan \emph{cloud} juga menyediakan 
-sumber daya yang diperlukan untuk menangani permintaan 
-\emph{API} dalam jumlah besar, memastikan bahwa alat 
-tetap responsif dan efisien bahkan di bawah beban kerja 
-yang tinggi. Langkah ini melibatkan konfigurasi server 
-\emph{cloud} untuk menjalankan \emph{LLM} dan mengatur 
-\emph{endpoint API} untuk menerima dan memproses permintaan 
-dari pengguna, memungkinkan integrasi yang mulus dengan 
-berbagai sistem dan aplikasi.

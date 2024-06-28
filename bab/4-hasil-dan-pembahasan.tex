@@ -1,10 +1,11 @@
 \chapter{HASIL DAN PEMBAHASAN}
 \label{chap:hasildanpembahasan}
 
-Pada penelitian ini dipaparkan \lipsum[1][1-5]
-
 \section{Hasil Eksperimen}
 \label{sec:hasilpengujian}
+
+Pada bagian ini, kami akan membahas hasil eksperimen yang dilakukan
+untuk menjawab rumusan masalah yang diajukan dalam penelitian ini.
 
 \subsection{Lingkungan Pengujian}
 \label{subsec:lingkunganpengujian}
@@ -614,7 +615,8 @@ sebelumnya. Berikut adalah hasil pengujian yang kami:
   keluaran yang salah, menghasilkan tingkat deteksi 
   kesalahan 100\%. Pada 16 program \emph{benchmark}, 
   FISUM menghasilkan baris input yang bermasalah dengan
-  akurasi sebesar 99\%.
+  akurasi sebesar 99\%. Pembahasan ini menjawab 
+  rumusan masalah yang pertama.
 
   \item \emph{\textbf{Data Reduction}} \\
   Tabel \ref{tb:HasilPengujian} juga mencantumkan total 
@@ -632,7 +634,8 @@ sebelumnya. Berikut adalah hasil pengujian yang kami:
   FISUM mampu secara implisit mempelajari pola 
   input yang menyebabkan kesalahan 
   selama fase \emph{retraining} dan mereproduksinya selama 
-  fase \emph{generating}.
+  fase \emph{generating}. Pembahasan ini menjawab
+  rumusan masalah yang kedua.
   
   \item \emph{\textbf{Data Generation Time}} \\
   Tujuan FISUM adalah untuk meminimalkan waktu 
@@ -652,6 +655,7 @@ sebelumnya. Berikut adalah hasil pengujian yang kami:
   membutuhkan 60 milidetik untuk menghasilkan satu baris, 
   menghasilkan total 0,3 detik untuk menghasilkan 
   ringkasan 1\% dari input yang menyebabkan kesalahan.
+  Pembahasan ini menjawab rumusan masalah yang ketiga.
   
   \item \emph{\textbf{Model Training Time}} \\
   FISUM melatih model pada input yang menyebabkan 
@@ -672,6 +676,7 @@ sebelumnya. Berikut adalah hasil pengujian yang kami:
   pada Program \#16, \emph{Word Count}. 
   Waktu pelatihan terendah adalah 103 detik 
   pada Program \#2, \emph{Commute Type}.
+  Pembahasan ini menjawab rumusan masalah yang keempat.
 \end{itemize}
 
 \begin{figure}[H]
@@ -679,7 +684,7 @@ sebelumnya. Berikut adalah hasil pengujian yang kami:
       \scalebox{0.9}{
             \begin{tikzpicture}
                   \begin{axis}[
-                  height = 0.4\textwidth,
+                  height = 0.9\textwidth,
                   width = 1\textwidth,
                   ylabel=\emph{Time(s)},
                   xlabel=\emph{Programs},

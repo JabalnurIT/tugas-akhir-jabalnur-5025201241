@@ -22,7 +22,7 @@
 \usepackage[table,xcdraw]{xcolor}
 
 % Pengaturan kutipan artikel
-\usepackage[style=apa, backend=biber]{biblatex}
+\usepackage[style=ieee, backend=bibtex]{biblatex}
 
 % Package lainnya
 \usepackage{changepage}
@@ -43,6 +43,7 @@
 \usepackage{tikz}
 % axis
 \usepackage{pgfplots}
+\pgfplotsset{compat=1.7}
 
 % Definisi untuk "Hati ini sengaja dikosongkan"
 \patchcmd{\cleardoublepage}{\hbox{}}{
@@ -135,6 +136,9 @@
 }
 \lstset{style=codestyle}
 
+% set filter to only show code from Chapter 1 - 5
+
+
 % Pengaturan format daftar isi
 \titlecontents{chapter}
 [4.5em]
@@ -170,6 +174,9 @@
 
 % Label Listing dalam bahasa indonesia
 \renewcommand{\lstlistingname}{Kode}
+
+% Label lampiran dalam bahasa indonesia
+\renewcommand{\appendixname}{Lampiran}
 
 % Pengaturan ukuran indentasi paragraf
 \setlength{\parindent}{2em}
@@ -225,6 +232,13 @@
 \listoftables
 \cleardoublepage
 
+% Daftar kode
+\renewcommand*\lstlistlistingname{DAFTAR KODE}
+\label{chap:daftar kode}
+\addcontentsline{toc}{chapter}{\lstlistlistingname}
+\lstlistoflistings
+\cleardoublepage
+
 % Nomor halaman isi dimulai dari sini
 \pagenumbering{arabic}
 
@@ -258,6 +272,11 @@
 \printbibliography
 \endgroup
 \cleardoublepage
+
+% Lampiran
+\input{lampiran/lampiran.tex}
+\cleardoublepage
+
 
 % Biografi penulis
 \input{lainnya/biografi-penulis.tex}

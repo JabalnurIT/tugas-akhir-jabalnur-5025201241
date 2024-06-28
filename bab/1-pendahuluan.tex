@@ -1,24 +1,74 @@
-\chapter{PENDAHULUAN}
-% \addcontentsline{toc}{chapter}{BAB I. PENDAHULUAN}
-% \setcounter{chapter}{1}
-\label{chap:pendahuluan}
+\chapter{PENDAHULUAN}\label{chap:pendahuluan}
 
 % Ubah bagian-bagian berikut dengan isi dari pendahuluan
 
-\section{Latar Belakang}
-\label{sec:latarbelakang}
+\section{Latar Belakang}\label{sec:latarbelakang}
 
-Analisis data modern memerlukan penanganan data berskala terabyte yang tersebar di berbagai mesin. Untuk membuat ini dapat dilakukan, kerangka kerja \emph{Data Intensive Scalable Computing (DISC)} seperti Apache Spark dan Google MapReduce memungkinkan analis data untuk membuat aplikasi terdistribusi. Volume besar data input untuk aplikasi DISC, ditambah dengan sifat terdistribusi dari program, membuat debugging menjadi sangat menantang.
+Analisis data modern memerlukan penanganan data berskala 
+terabyte yang tersebar di berbagai mesin. Untuk membuat 
+ini dapat dilakukan, kerangka kerja 
+\emph{Data Intensive Scalable Computing (DISC)} seperti 
+Apache Spark~\cite{zaharia2010,spark} dan 
+Google MapReduce~\cite{dean2008} memungkinkan analis 
+data untuk membuat aplikasi terdistribusi. Volume besar 
+data input untuk aplikasi DISC, ditambah dengan sifat 
+terdistribusi dari program, membuat debugging menjadi 
+sangat menantang.
+Bayangkan sebuah program yang menghitung rata-rata 
+curah hujan per tahun di Amerika Serikat. Ini 
+memerlukan penghitungan rata-rata dari puluhan 
+juta nilai yang dikumpulkan dari sensor yang 
+tersebar di seluruh negeri. Setelah menjalankan 
+program, analis memperhatikan bahwa nilai rata-rata 
+yang dihasilkan sangat tinggi dan mencurigakan. 
+Bagaimana programmer akan mendiagnosis penyebab 
+kesalahan ini?
 
-Bayangkan sebuah program yang menghitung rata-rata curah hujan per tahun di Amerika Serikat. Ini memerlukan penghitungan rata-rata dari puluhan juta nilai yang dikumpulkan dari sensor yang tersebar di seluruh negeri. Setelah menjalankan program, analis memperhatikan bahwa nilai rata-rata yang dihasilkan sangat tinggi dan mencurigakan. Bagaimana programmer akan mendiagnosis penyebab kesalahan ini?
+Beberapa penelitian dalam debugging program telah 
+berfokus pada pengurangan ukuran input yang 
+menyebabkan kesalahan~\cite{zeller2002,misherghi2006,kirschner2020,clause2009}.
+Banyak dari teknik ini 
+adalah varian dari algoritma delta debugging, 
+yang bekerja dengan menjalankan program berulang 
+kali dengan segmen-segmen berbeda dari input yang 
+menyebabkan kesalahan hingga algoritma tersebut 
+menemukan ukuran input minimal. Teknik pengurangan 
+input tradisional ini, meskipun telah dicoba~\cite{gulzar2018}, tidak 
+dapat diterapkan pada aplikasi DISC karena memerlukan 
+eksekusi berulang yang lambat dan memakan banyak 
+sumber daya.
 
-Beberapa penelitian dalam debugging program telah berfokus pada pengurangan ukuran input yang menyebabkan kesalahan. Banyak dari teknik ini adalah varian dari algoritma delta debugging, yang bekerja dengan menjalankan program berulang kali dengan segmen-segmen berbeda dari input yang menyebabkan kesalahan hingga algoritma tersebut menemukan ukuran input minimal. Teknik pengurangan input tradisional ini, meskipun telah dicoba, tidak dapat diterapkan pada aplikasi DISC karena memerlukan eksekusi berulang yang lambat dan memakan banyak sumber daya.
+Dalam penelitian ini, kami mengusulkan teknik berbasis 
+\emph{large language model} (LLM) yang efisien untuk 
+merangkum data yang bermasalah, yang mungkin mencakup 
+jutaan baris, menjadi hanya beberapa baris yang tetap 
+dapat mereproduksi kesalahan. Kami mewujudkan ide ini 
+dalam alat yang disebut FISUM, sebuah sistem 
+\emph{Fault-inducing Inputs Summarization}. 
+Inti dari teknik kami adalah bahwa LLM generatif 
+modern dapat dilatih untuk menangkap pola input 
+yang memicu kesalahan dari data besar. Hasil dari 
+pelatihan model ini kemudian dapat digunakan untuk 
+menghasilkan input baru yang menyebabkan pola 
+kesalahan yang sama.
 
-Dalam penelitian ini, kami mengusulkan teknik berbasis \emph{large language model} (LLM) yang efisien untuk merangkum data yang bermasalah, yang mungkin mencakup jutaan baris, menjadi hanya beberapa baris yang tetap dapat mereproduksi kesalahan. Kami mewujudkan ide ini dalam alat yang disebut FISUM, sebuah sistem \emph{Fault-inducing Inputs Summarization}. Inti dari teknik kami adalah bahwa LLM generatif modern dapat dilatih untuk menangkap pola input yang memicu kesalahan dari data besar. Hasil dari pelatihan model ini kemudian dapat digunakan untuk menghasilkan input baru yang menyebabkan pola kesalahan yang sama.
-
-Teknik kami memerlukan proses \emph{pre-training} dari model GPT versi ringan, distilGPT, pada seluruh data input. Langkah \emph{unsupervised} ini memungkinkan model untuk mempelajari struktur dasar dan pola dari data tersebut. Kami kemudian menggunakan Titian untuk mengambil subset besar dari input yang dianggap mencurigakan terkait dengan eksekusi yang salah. distilGPT kemudian dilatih ulang pada data mencurigakan ini untuk membiasakannya dalam menghasilkan input yang menyebabkan kesalahan. Akhirnya, distilGPT diarahkan untuk menghasilkan data yang dapat mereproduksi kesalahan tersebut.
-
-% Untuk mengevaluasi teknik kami, kami menggunakan satu set program \emph{ \emph{benchmark}} dari penelitian sebelumnya tentang debugging dan pengujian aplikasi DISC. Eksperimen kami pada program \emph{benchmark} ini menunjukkan bahwa FISUM, bahkan dengan model versi ringan seperti DistilGPT, dapat secara efektif merangkum input yang menyebabkan kesalahan. Ini mengurangi input asli yang menyebabkan kesalahan dari alat \emph{provenans} data sebesar rata-rata 99\%, sambil tetap menyebabkan pola kesalahan yang sama. Saat menghasilkan input bermasalah dalam jumlah minimal, FISUM menghasilkan setiap baris data dalam waktu rata-rata kurang dari 50 milidetik.
+Teknik kami memerlukan proses \emph{pre-training} 
+dari model GPT versi ringan, distilGPT, pada seluruh 
+data input. Langkah \emph{unsupervised} ini 
+memungkinkan model untuk mempelajari struktur 
+dasar dan pola dari data tersebut. Kami kemudian 
+menggunakan Titian~\cite{interlandi2015} untuk mengambil subset besar 
+dari input yang dianggap mencurigakan terkait 
+dengan eksekusi yang salah. distilGPT kemudian 
+dilatih ulang pada data mencurigakan ini untuk 
+membiasakannya dalam menghasilkan input yang 
+menyebabkan kesalahan. Akhirnya, distilGPT diarahkan 
+untuk menghasilkan data yang dapat mereproduksi 
+kesalahan tersebut.
+Untuk mengevaluasi teknik kami, kami menggunakan satu 
+set program \emph{benchmark} dari penelitian sebelumnya 
+tentang \emph{debugging} dan pengujian aplikasi 
+DISC~\cite{gulzar2019,humayun2023,zhang2021}. 
 
 \section{Rumusan Permasalahan}
 \label{sec:permasalahan}
