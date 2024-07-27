@@ -67,7 +67,7 @@ yang digunakan dalam penelitian ini:
                   \label{tb:commutetypedataset} \\
                   \hline
                   \rowcolor[HTML]{C0C0C0}
-                  \textbf{\#} & \textbf{Kode Pos A} & \textbf{Kode Pos B} & \textbf{Jarak} & \textbf{Waktu} \\
+                  \textbf{\#} & \textbf{Kode Pos A} & \textbf{Kode Pos B} & \textbf{Jarak} & \textbf{Kecepatan} \\
                   sr & 90002 & 90017 & 1501 & 100 \\
                   sr & 90098 & 90077 & 2106 & 37 \\
                   sr & 90079 & 90009 & 7009 & 116 \\
@@ -75,10 +75,20 @@ yang digunakan dalam penelitian ini:
             \end{longtable}
 
       \item \emph{\textbf{Commute Type Full}} \\
-      % sr,90002,90017,1501,100
-      % sr,90098,90077,2106,37
-      % sr,90079,90009,7009,116
-            Program \emph{commute type full} menggunakan 2 dataset, yaitu \emph{trips} dan \emph{locations}. Dataset \emph{trips} berupa kode pos area A, kode pos area B, jarak, serta waktu yang ditempuh. Sedangkan, dataset kedua yang digunakan adalah \emph{locations}, dataset ini berisi lokasi dari sebuah kode pos. Selanjutnya, program akan menggabungkan kedua dataset apabila ada kesamaan pada kode pos. Kemudian, program akan mengolah jarak dan waktu menjadi kecepatan yang terjadi dalam menempuh perjalanan dari kota A ke B. Dari data kecepatan tersebut, program akan mengklasifikasikan ke dalam tiga kategori, yaitu sebagai berikut:
+      
+
+            Program \emph{commute type full} menggunakan 2 dataset, 
+            yaitu \emph{trips} dan \emph{locations}. Dataset 
+            \emph{trips} berupa kode pos area A, kode pos area B, 
+            jarak, serta waktu yang ditempuh. Sedangkan, dataset 
+            kedua yang digunakan adalah \emph{locations}, dataset 
+            ini berisi lokasi dari sebuah kode pos. Selanjutnya, 
+            program akan menggabungkan kedua dataset apabila ada 
+            kesamaan pada kode pos. Kemudian, program akan mengolah 
+            jarak dan waktu menjadi kecepatan yang terjadi dalam 
+            menempuh perjalanan dari kota A ke B. Dari data kecepatan 
+            tersebut, program akan mengklasifikasikan ke dalam tiga 
+            kategori, yaitu sebagai berikut:
             \begin{itemize}
                   \item kecepatan $ > $ 40 = \emph{car}
                   \item kecepatan $ > $ 15 = \emph{public}
@@ -87,19 +97,39 @@ yang digunakan dalam penelitian ini:
             Pada program ini, Titian bekerja untuk mendeteksi input yang dianggap salah, yaitu yang memiliki ID lokasi kurang dari sama dengan 1000.
             Adapun contoh dataset yang digunakan dapat 
             dilihat pada Tabel \ref{tb:commutetypefulldataset}.
-
+            % 610,18.2911,-67.12243,Anasco,PR,Puerto Rico,TRUE,,26502,275.7,72011,Añasco,,Añasco|Moca|Las Marías|Aguada,72011|72099|72083|72003,FALSE,FALSE,America/Puerto_Rico
+            % 611,18.27698,-66.80688,Angeles,PR,Puerto Rico,TRUE,,,,72141,Utuado,,Utuado,72141,FALSE,FALSE,America/Puerto_Rico
+            % 612,18.41283,-66.7051,Arecibo,PR,Puerto Rico,TRUE,,58771,298,72013,Arecibo,,Arecibo|Hatillo|Barceloneta,72013|72065|72017,FALSE,FALSE,America/Puerto_Rico
+            
+            
             \begin{longtable}{|c|c|c|c|c|}
                   \caption{Contoh Dataset Commute Type Full.}
                   \label{tb:commutetypefulldataset} \\
                   \hline
                   \rowcolor[HTML]{C0C0C0}
-                  \textbf{\#} & \textbf{Kode Pos A} & \textbf{Kode Pos B} & \textbf{Jarak} & \textbf{Waktu} \\
-                  sr & 90002 & 90017 & 1501 & 100 \\
-                  sr & 90098 & 90077 & 2106 & 37 \\
-                  sr & 90079 & 90009 & 7009 & 116 \\
+                  \textbf{ID} & \textbf{Latitude} & \textbf{Longitude} & \textbf{City} & \textbf{State}\\
+                  \hline
+                  610 & 18.2911 & -67.12243 & Anasco & PR \\
+                  611 & 18.27698 & -66.80688 & Angeles & PR \\
+                  \hline
+                  \rowcolor[HTML]{C0C0C0}
+                  \textbf{Country} & \textbf{IsPrimary} & \textbf{Zip} & \textbf{CountyName} & \textbf{CountyANSI}\\
+                  \hline
+                  Puerto Rico & TRUE & 26502 & Añasco & 72011 \\
+                  Puerto Rico & TRUE & 72141 & Utuado & 72141 \\
+
+                  \hline
+                  \rowcolor[HTML]{C0C0C0}
+                  \textbf{Cities} & \textbf{CitiesFIPS} & \textbf{IsCSAS} & \textbf{IsMSAS} & \textbf{TimeZone}\\
+                  \hline
+                  Añasco \textbar{} Moca  & 72011 \textbar{} 72099  & FALSE & FALSE & America/Puerto\_Rico \\
+                  Utuado & 72141 & FALSE & FALSE & America/Puerto\_Rico \\
                   \hline
             \end{longtable}
-      
+
+      \
+
+      \
       \item \emph{\textbf{Customers}} \\
       % s"""$oid,$cid,$time,$item"""
       % order651,888,78895039,item797864327
@@ -166,6 +196,8 @@ yang digunakan dalam penelitian ini:
                   \hline
             \end{longtable}
 
+      \
+
       \item \emph{\textbf{External Call}} \\
       % Teks
       % This is a sentence
@@ -188,7 +220,6 @@ yang digunakan dalam penelitian ini:
                   This not a sentence \\
                   This is a word \\
                   My name is black \\
-                  I am a student \\
                   \hline
             \end{longtable}
 
@@ -211,7 +242,6 @@ yang digunakan dalam penelitian ini:
                   \$522224 \\
                   \$415728 \\
                   \$501565 \\
-                  \$820638 \\
                   \hline
             \end{longtable}
 
@@ -238,9 +268,10 @@ yang digunakan dalam penelitian ini:
                   LAS & hOvx8HlmGI & ke7IhMxWmx & 123.0983 & 5.819 & zQ6Zrv9bgQ \\
                   LAS & AJSAZYp44p & lJW9lm2npx & 135.2637 & -25.0603 & Fter9EB1Vd \\
                   LAS & 3L4mwHv6W & pkUt6axm1Y & 176.4615 & 23.2344 & wcb4CeYYo7 \\
-                  LAS & eRUZDr9FqE & XXuxIq7gGT & -134.0949 & 10.8214 & SxtFuOA1xS \\
                   \hline
             \end{longtable}
+      
+      \
             
       \item \emph{\textbf{Income Aggregation}} \\
       % \item  s"""$zip,$age,$r"""
@@ -320,6 +351,8 @@ yang digunakan dalam penelitian ini:
                   \hline
             \end{longtable}
 
+      \
+
       \item \emph{\textbf{Movie Rating}} \\
       % s"""$movie,$rating"""
       % dRQe4ozltL,29
@@ -353,7 +386,6 @@ yang digunakan dalam penelitian ini:
       % 481,347
       % 424,253
       % 256,17
-
             Program ini menghitung jarak antara 2 bilangan berdasarkan \emph{Collatz Conjecture}. Kemudian, Titian akan melacak bilangan yang memiliki jarak tidak sama dengan 25 sebagai data yang tidak valid.
             Adapun contoh dataset yang digunakan dapat 
             dilihat pada Tabel \ref{tb:numberseriesdataset}.
@@ -398,6 +430,8 @@ yang digunakan dalam penelitian ini:
                   CS209 & 437 \\
                   \hline
             \end{longtable}
+
+      \ 
 
       \item \emph{\textbf{Word Count}} \\
       % This is a sentence
@@ -681,7 +715,7 @@ sebelumnya. Berikut adalah hasil pengujian yang kami:
 
 \begin{figure}[H]
       \centering
-      \scalebox{0.9}{
+      \scalebox{0.7}{
             \begin{tikzpicture}
                   \begin{axis}[
                   height = 0.9\textwidth,

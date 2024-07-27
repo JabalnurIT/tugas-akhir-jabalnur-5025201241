@@ -8,8 +8,8 @@ Analisis data modern memerlukan penanganan data berskala
 terabyte yang tersebar di berbagai mesin. Untuk membuat 
 ini dapat dilakukan, kerangka kerja 
 \emph{Data Intensive Scalable Computing (DISC)} seperti 
-Apache Spark~\cite{zaharia2010,spark} dan 
-Google MapReduce~\cite{dean2008} memungkinkan analis 
+Apache Spark~(\cite{zaharia2010,spark}) dan 
+Google MapReduce~(\cite{dean2008}) memungkinkan analis 
 data untuk membuat aplikasi terdistribusi. Volume besar 
 data input untuk aplikasi DISC, ditambah dengan sifat 
 terdistribusi dari program, membuat debugging menjadi 
@@ -24,19 +24,28 @@ yang dihasilkan sangat tinggi dan mencurigakan.
 Bagaimana programmer akan mendiagnosis penyebab 
 kesalahan ini?
 
-Beberapa penelitian dalam debugging program telah 
-berfokus pada pengurangan ukuran input yang 
-menyebabkan kesalahan~\cite{zeller2002,misherghi2006,kirschner2020,clause2009}.
-Banyak dari teknik ini 
-adalah varian dari algoritma delta debugging, 
-yang bekerja dengan menjalankan program berulang 
-kali dengan segmen-segmen berbeda dari input yang 
-menyebabkan kesalahan hingga algoritma tersebut 
-menemukan ukuran input minimal. Teknik pengurangan 
-input tradisional ini, meskipun telah dicoba~\cite{gulzar2018}, tidak 
-dapat diterapkan pada aplikasi DISC karena memerlukan 
-eksekusi berulang yang lambat dan memakan banyak 
-sumber daya.
+Beberapa penelitian dalam \emph{debugging} program telah berfokus pada pengurangan ukuran \emph{input} yang menyebabkan kesalahan. Zeller, misalnya, mengembangkan teknik yang mirip dengan \emph{delta debugging} untuk menyederhanakan kasus uji yang gagal, seperti prototipe yang menyederhanakan 896 baris HTML menjadi satu baris yang menyebabkan kegagalan~(\cite{zeller2002}). Misherghi memperkenalkan HDD, sebuah algoritma yang mempercepat \emph{delta debugging} dengan menerapkan teknik ini pada struktur data input, bertujuan memangkas bagian besar dari input yang tidak relevan~(\cite{misherghi2006}). Kirschner menghadirkan ddmax, yang secara otomatis memperbaiki kesalahan pada data dengan mencari perbedaan antara input yang gagal dan input "maksimal" yang berhasil, mencakup semua fragmen input yang tidak dapat diproses~(\cite{kirschner2020}). Clause, di sisi lain, menggunakan teknik dynamic tainting dengan menandai input saat memasuki aplikasi dan melacak penyebarannya untuk mengidentifikasi input yang relevan~(\cite{clause2009}). Teknik-teknik tersebut adalah varian dari algoritma \emph{delta debugging}, yang bekerja dengan menjalankan program berulang kali dengan segmen-segmen berbeda dari input hingga menemukan ukuran input minimal. \emph{Delta debugging} adalah teknik yang digunakan dalam pemrograman untuk menyederhanakan dan memperkecil ukuran input atau kasus uji yang menyebabkan kesalahan dalam program. Tujuannya adalah untuk menemukan bagian terkecil dari input yang masih menyebabkan kesalahan, sehingga memudahkan pengidentifikasian dan perbaikan masalah. Teknik pengurangan input tradisional ini, meskipun telah dicoba~(\cite{gulzar2018}), tidak dapat diterapkan secara efektif pada aplikasi DISC karena memerlukan eksekusi berulang yang lambat dan memakan banyak sumber daya.
+
+Pada penelitian yang lain, Gulzar mengusulkan teknik yang disebut 
+BigTest, sebuah kerangka pengujian \emph{white-box} yang dirancang untuk 
+secara otomatis menghasilkan data sintetik konkret guna meningkatkan 
+efektivitas dan efisiensi pengujian aplikasi Apache Spark. 
+Kelebihan dari BigTest termasuk kemampuannya untuk menghasilkan 
+data uji yang dapat mengungkapkan hingga 2 kali lebih banyak cacat 
+dibandingkan dengan seluruh dataset dan mengurangi waktu pengujian 
+hingga 194 kali lebih cepat. BigTest juga mengintegrasikan eksekusi 
+simbolik dari fungsi yang ditentukan pengguna (UDF) dengan 
+spesifikasi logis dari operator aliran data dan relasional 
+untuk mengeksplorasi semua jalur dalam aplikasi DISC. 
+Walaupun BigTest dapat digunakan pada aplikasi DISC, 
+kelemahan dari teknik ini yaitu potensi masalah dalam 
+menangani fungsi UDF yang sangat kompleks. Selain itu, meskipun 
+BigTest mengklaim efisiensi waktu pengujian, skalabilitas untuk 
+dataset yang sangat besar dan kompleks tetap menjadi tantangan, 
+dan data sintetik yang dihasilkan mungkin tidak sepenuhnya 
+mencerminkan kondisi dunia nyata yang dikarenakan oleh
+penggunaan fungsi UDF yang sangat kompleks~(\cite{gulzar2020}).
+
 
 Dalam penelitian ini, kami mengusulkan teknik berbasis 
 \emph{large language model} (LLM) yang efisien untuk 
@@ -52,23 +61,60 @@ pelatihan model ini kemudian dapat digunakan untuk
 menghasilkan input baru yang menyebabkan pola 
 kesalahan yang sama.
 
-Teknik kami memerlukan proses \emph{pre-training} 
-dari model GPT versi ringan, distilGPT, pada seluruh 
+FISUM memerlukan proses \emph{pre-training} 
+dari model GPT-2 versi ringan, distilGPT2, pada seluruh 
 data input. Langkah \emph{unsupervised} ini 
 memungkinkan model untuk mempelajari struktur 
-dasar dan pola dari data tersebut. Kami kemudian 
-menggunakan Titian~\cite{interlandi2015} untuk mengambil subset besar 
+dasar dan pola dari data tersebut. FISUM kemudian 
+menggunakan Titian untuk mengambil subset besar 
 dari input yang dianggap mencurigakan terkait 
-dengan eksekusi yang salah. distilGPT kemudian 
+dengan eksekusi yang salah. Titian merupakan sebuah 
+\textit{Data Provenance Engine} 
+yang dibangun untuk Apache Spark dengan tujuan untuk memulihkan input yang 
+menyebabkan kesalahan dengan cara melacak data\emph{input} mana 
+saja yang mempengaruhi hasil mencurigakan 
+pada aplikasi tersebut~(\cite{interlandi2015}).
+DistilGPT2 kemudian 
 dilatih ulang pada data mencurigakan ini untuk 
 membiasakannya dalam menghasilkan input yang 
-menyebabkan kesalahan. Akhirnya, distilGPT diarahkan 
-untuk menghasilkan data yang dapat mereproduksi 
-kesalahan tersebut.
-Untuk mengevaluasi teknik kami, kami menggunakan satu 
-set program \emph{benchmark} dari penelitian sebelumnya 
-tentang \emph{debugging} dan pengujian aplikasi 
-DISC~\cite{gulzar2019,humayun2023,zhang2021}. 
+menyebabkan kesalahan. DistilGPT2 tersebut dapat diakses menggunakan
+sebuah API yang dikembangkan menggunakan FastAPI. 
+FastAPI adalah sebuah kerangka kerja web modern yang
+dikembangkan menggunakan bahasa pemrograman Python
+yang memungkinkan pengembang untuk membuat API
+dengan cepat dan mudah~(\cite{fastapi}). Data yang dikirim ke API
+harus berupa data \emph{unstructure text} sehingga
+\emph{faulty input} yang dihasilkan oleh Titian akan diubah terlebih dahulu
+dengan cara menggabungkan kolom data menggunakan "," sebagai
+pemisah antar kolom dan menggabungkan baris data menggunakan
+"\#\#\#" sebagai pemisah antar baris.
+
+DistilGPT2 yang telah selesai dilatih dapat digunakan
+untuk menghasilkan \emph{faulty input} baru yang
+memiliki kemiripan karakteristik dengan \emph{faulty input}
+yang telah diidentifikasi hanya saja dengan ukuran
+yang lebih kecil. \emph{Faulty input} baru ini kemudian dapat
+digunakan oleh pengembang untuk melakukan analisis
+lebih lanjut terhadap kesalahan yang terjadi pada \emph{input} aplikasi
+DISC. Untuk menguji hasil dari FISUM, \emph{faulty input} 
+baru yang dihasilkan dapat dijalankan ulang pada aplikasi DISC
+dengan tetap menanamkan Titian pada aplikasi tersebut untuk
+mengidentifikasi apakah \emph{faulty input} baru tersebut
+dapat menyebabkan kesalahan yang sama dengan \emph{faulty input}
+yang telah diidentifikasi sebelumnya. Penelitian ini
+akan menggunakan 16 \emph{benchmark program} yang berjalan
+pada aplikasi DISC untuk menguji keefektifan dari FISUM
+yang berasal dari penelitian 
+sebelumnya yaitu \emph{age analysis, commute type, commute type full,
+customers, delays}~(\cite{gulzar2019})\emph{, delivery faults, external call,
+find salary, flight distance, income aggregation,
+inside circle, loan type, movie rating}~(\cite{humayun2023})\emph{, 
+number series, student grade, dan
+word count}~(\cite{zhang2021}).
+\\
+\\
+\\
+
 
 \section{Rumusan Permasalahan}
 \label{sec:permasalahan}
@@ -77,13 +123,11 @@ Berdasarkan latar belakang di atas, maka dapat ditarik rumusan masalah sebagai b
 
 \begin{enumerate}[nolistsep]
 
-   \item Apakah input yang bermasalah yang dihasilkan oleh FISUM masih mempertahankan kemampuan deteksi kesalahan?
+   \item Bagaimana cara mengidentifikasi \emph{faulty input} dari aplikasi DISC?
 
-   \item Berapa banyak persentase pengurangan input bermasalah yang dapat dihasilkan oleh FISUM dari dataset yang diberikan?
+   \item Bagaimana cara memproduksi \emph{faulty input} baru dari \emph{faulty input} yang telah teridentifikasi dalam waktu yang singkat?
 
-   \item Berapa lama waktu yang dibutuhkan untuk menghasilkan input bermasalah oleh FISUM?
-   
-   \item Berapa lama waktu yang dibutuhkan untuk melatih tiap model dengan FISUM?
+   \item Bagaimana cara mengevaluasi kemiripan karakteristik antara \emph{faulty input} baru dengan \emph{faulty input} yang telah teridentifikasi?
 
 \end{enumerate}
 
@@ -94,13 +138,16 @@ Batasan masalah penelitian ini adalah sebagai berikut:
 
 \begin{enumerate}[nolistsep]
 
+  \item Sumber dana dari penelitian ini berasal dari dana LPDP pada program penelitian \emph{Garuda ACE} tahun 2022-2024 yang diselenggarakan oleh Direktorat Jenderal Pendidikan Tinggi,
+  Kementerian Pendidikan, Kebudayaan, Riset, dan Teknologi
+  
   \item Implementasi algoritma menggunakan bahasa Python dan Scala.
 
   \item Pembuatan sistem hanya berfokus pada proses \emph{debugging} dan \emph{generate new faulty input} bukan pada aplikasi DISC yang test inputnya akan didebug.
 
   \item Proses \emph{debugging} dan \emph{generate new faulty input} hanya berfokus pada 16 \emph{benchmark program} yang berjalan di aplikasi DISC. 
 
-  \item Test input berupa \emph{text} yang menyatukan beberapa kolom yang dibutuhkan
+  \item Test input berupa \emph{structure text}.
 
 \end{enumerate}
 
@@ -111,10 +158,9 @@ Tujuan penelitian ini adalah sebagai berikut:
 
 \begin{enumerate}[nolistsep]
 
-  \item Mengevaluasi kemampuan deteksi kesalahan dari input bermasalah yang dihasilkan oleh FISUM.
-  \item Mengukur persentase pengurangan input bermasalah yang dihasilkan oleh FISUM dari dataset yang diberikan.
-  \item Mengukur waktu yang dibutuhkan untuk menghasilkan input bermasalah oleh FISUM.
-  \item Mengukur waktu yang dibutuhkan untuk melatih tiap model dengan FISUM.
+  \item Membuat sebuah sistem yang dapat mengidentifikasi \emph{faulty input} yang menyebabkan kesalahan dalam aplikasi DISC.
+  \item Membuat sebuah sistem yang dapat memproduksi \emph{faulty input} baru berdasarkan \emph{faulty input} yang telah diidentifkasi dalam waktu yang singkat.
+  \item Membuat sebuah sistem yang dapat memproduksi \emph{faulty input} baru yang memiliki kemiripan karakteristik dengan \emph{faulty input} yang telah diidentifikasi.
 
 \end{enumerate}
 
@@ -124,9 +170,11 @@ Tujuan penelitian ini adalah sebagai berikut:
 Manfaat penelitian ini adalah sebagai berikut:
 
 \begin{enumerate}[nolistsep]
-  \item Membantu \ meningkatkan \ kualitas \  perangkat \  lunak \ yang \  berjalan \ pada \ platform \emph{Data-Intensive Scalable Computing (DISC)},\  seperti \ Apache \ Hadoop, \ Apache Spark, dan Apache Flink.
-  \item Membantu menghemat waktu dan upaya yang diperlukan untuk mengidentifikasi dan mengatasi masalah dalam aplikasi DISC.
-  \item Meningkatkan produktivitas pengembang perangkat lunak.
-  \item Membantu penilitian yang terkait dengan aplikasi DISC.
-
-\end{enumerate}
+  \item Meningkatkan kualitas perangkat lunak di sistem \emph{Data-Intensive Scalable Computing (DISC)} dengan memastikan pemrosesan data yang lebih efisien dan mengurangi kesalahan.
+  
+  \item Menghemat waktu dan usaha dalam mengidentifikasi dan memperbaiki masalah aplikasi DISC melalui metode yang efisien untuk deteksi dan analisis kesalahan.
+  
+  \item Meningkatkan produktivitas pengembang perangkat lunak dengan menyediakan alat otomatisasi untuk menghasilkan dan menguji \emph{faulty input} dengan lebih cepat.
+  
+  \item Mendukung penelitian aplikasi DISC dengan menawarkan metodologi dan alat untuk mengevaluasi performa sistem dalam menangani data besar dan meningkatkan efektivitas aplikasi.
+  \end{enumerate}
