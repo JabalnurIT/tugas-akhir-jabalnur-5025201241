@@ -2,8 +2,6 @@
 \addcontentsline{toc}{chapter}{LEMBAR PENGESAHAN}
 
 % Menyembunyikan nomor halaman
-\thispagestyle{empty}
-
 \begin{center}
   \textbf{\tatitle{}}
 \end{center}
@@ -69,3 +67,10 @@
   \textbf{\MakeUppercase{\place{}}\\\MONTH{}, \the\year{}}
 \end{center}
 \endgroup
+
+\thispagestyle{empty}
+\begin{tikzpicture}[remember picture, overlay]
+  \node[anchor=north west, inner sep=0] at (current page.north west) {
+      \includegraphics[width=\paperwidth, height=\paperheight]{gambar/LembarPengesahanIndo.png}
+  };
+\end{tikzpicture}

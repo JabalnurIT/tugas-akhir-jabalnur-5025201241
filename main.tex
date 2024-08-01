@@ -34,12 +34,15 @@
 \usepackage{etoolbox}
 \usepackage{graphicx}
 \usepackage{lipsum}
+\usepackage{caption}
 \usepackage{longtable}
 \usepackage{tabularx}
 \usepackage{wrapfig}
 \usepackage{float}
 \usepackage{titlesec}
 \usepackage{titletoc}
+\usepackage{multirow}
+\usepackage{listings}
 % tikzpicture
 \usepackage{tikz}
 % axis
@@ -137,6 +140,7 @@
 }
 \lstset{style=codestyle}
 
+
 % set filter to only show code from Chapter 1 - 5
 
 
@@ -146,7 +150,44 @@
 {\smallskip}
 {\contentslabel[\MakeUppercase{bab~\romannumeral\thecontentslabel}]{4em}\MakeUppercase}
 {\hspace*{-4em}\MakeUppercase}
-{\hfill\contentspage}[\medskip]
+{\dotfill\contentspage}[\smallskip]
+
+
+\captionsetup[figure]{labelsep=space}
+\captionsetup[table]{labelsep=space}
+\captionsetup[lstlisting]{labelsep=space}
+
+
+% Label tabel dan gambar dalam bahasa indonesia
+\renewcommand{\figurename}{}
+\makeatletter
+\renewcommand*\l@figure{\@dottedtocline{1}{1.5em}{5.4em}}% Default: 1.5em/2.3em
+\let\l@table\l@figure
+\makeatother
+\renewcommand{\thefigure}{Gambar~\arabic{chapter}.\arabic{figure}~}
+
+\renewcommand{\tablename}{}
+\makeatletter
+\renewcommand*\l@table{\@dottedtocline{1}{1.5em}{5em}}% Default: 1.5em/2.3em
+\let\l@table\l@table
+\makeatother
+\renewcommand{\thetable}{Tabel~\arabic{chapter}.\arabic{table}~}
+
+% Label Listing dalam bahasa indonesia
+\renewcommand{\lstlistingname}{}
+\renewcommand{\lstlistlistingname}{DAFTAR KODE}
+\makeatletter
+\renewcommand*\l@lstlisting{\@dottedtocline{1}{1.5em}{7.4em}}% Default: 1.5em/2.3em
+\let\l@table\l@table
+\makeatother
+\AtBeginDocument{
+  \renewcommand\thelstlisting{Kode Sumber~\arabic{chapter}.\arabic{section}}
+}
+
+% \renewcommand{\thelstlisting}{Kode Sumber~\arabic{chapter}.\arabic{lstlisting}}
+
+% Label lampiran dalam bahasa indonesia
+\renewcommand{\appendixname}{Lampiran}
 
 % Isi keseluruhan dokumen
 \begin{document}
@@ -169,15 +210,13 @@
 \input{sampul/sampul-luar-tipis.tex}
 \cleardoublepage
 
-% Label tabel dan gambar dalam bahasa indonesia
-\renewcommand{\figurename}{Gambar}
-\renewcommand{\tablename}{Tabel}
 
-% Label Listing dalam bahasa indonesia
-\renewcommand{\lstlistingname}{Kode}
 
-% Label lampiran dalam bahasa indonesia
-\renewcommand{\appendixname}{Lampiran}
+
+
+
+
+% Pengaturan format list of gambar
 
 % Pengaturan ukuran indentasi paragraf
 \setlength{\parindent}{2em}
@@ -218,6 +257,8 @@
 \addcontentsline{toc}{chapter}{\contentsname}
 \tableofcontents
 \cleardoublepage
+
+
 
 % Daftar gambar
 \renewcommand*\listfigurename{DAFTAR GAMBAR}
@@ -281,6 +322,6 @@
 
 % Biografi penulis
 \input{lainnya/biografi-penulis.tex}
-\cleardoublepage
+% \cleardoublepage
 
 \end{document}

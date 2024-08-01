@@ -1,12 +1,3 @@
-from fastapi import Depends, FastAPI
-from pydantic import BaseModel
-
-from .distilgpt2.model import Model, get_model
-
-from .generic import *
-
-app = FastAPI()
-
 @app.post("/retrain", response_model=GenericRetrainResponse)
 async def retrain(request: GenericRetrainRequest, model: Model = Depends(get_model)):
     status = model.retrain(request.texts)
@@ -30,10 +21,7 @@ async def reset(model: Model = Depends(get_model)):
 @app.post("/model-list", response_model=GenericModelListResponse)
 async def useModel(model: Model = Depends(get_model)):
     current,models = model.get_model_list()
-    return GenericModelListResponse(
-        current=current,
-        models=models
-    )
+    return GenericModelListResponse(current=current,models=models)
     
 @app.post("/use-model", response_model=GenericUseModelResponse)
 async def useModel(request:GenericUseModelRequest, model: Model = Depends(get_model)):

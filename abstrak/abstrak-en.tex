@@ -16,7 +16,6 @@
 
   \emph{Advisor}    & : & \advisor{}   \\
 
-  \\
 \end{tabularx}
 \endgroup
 
@@ -31,7 +30,7 @@
 
 \emph{FISUM uses Titian, a Data Provenance Engine built for Apache Spark, to recover inputs that caused errors. A Data Provenance Engine is a system that tracks the origin, history, and journey of data in a computing system to help identify the source of errors and understand data transformations from the original source to its final form. Titian is then embedded into DISC applications with problematic outputs to find Faulty Input, i.e., data rows in the dataset that cause problematic outputs in the DISC application. A lightweight language model, HuggingFace's DistilGPT2, is then trained using the initial DISC application dataset to familiarize the model with the application data. This model is further trained with Faulty Input from Titian to understand the characteristics of the Faulty Input. The trained DistilGPT2 model can then generate new Faulty Input that is much smaller in size compared to the original while retaining similar error characteristics to the initial Faulty Input within a short time.}
 
-\emph{Experiments were conducted by testing 16 Benchmark Applications, which are DISC applications, to measure FISUM's accuracy in finding Faulty Input in the application dataset, the accuracy of errors in new Faulty Input, and the Mean Square Error (MSE) of characteristics between the initial and new Faulty Input. FISUM effectively identifies Faulty Input in DISC applications with 100\% accuracy, summarizes Faulty Input with 99\% accuracy in less than 50 milliseconds per row on average, and presents similarity in characteristics between the initial and new Faulty Input with an MSE of 0.08.}
+\emph{Experiments were conducted by testing 16 Benchmark Applications, which are DISC applications, to measure FISUM's accuracy in finding Faulty Input in the application dataset, the accuracy of errors in new Faulty Input, and the Mean Square Error (MSE) of characteristics between the initial and new Faulty Input. FISUM effectively identifies Faulty Input in DISC applications with 100\% accuracy, summarizes Faulty Input with 99.4\% accuracy in less than 0.082 seconds per row on average, and presents similarity in characteristics between the initial and new Faulty Input with an MSE of 0.262.}
 
 
 % Ubah kata-kata berikut dengan kata kunci dari tugas akhir dalam Bahasa Inggris

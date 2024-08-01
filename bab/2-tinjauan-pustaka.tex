@@ -5,7 +5,7 @@
 \label{sec:penelitianterkait}
 
 Terdapat 5 penelitian terkait yang menjadi dasar dari penelitian ini
-yang dapat dilihat pada gambar \ref{fig:fishbone}.
+yang dapat dilihat pada  \ref{fig:fishbone}.
 % Contoh input gambar
 \begin{figure}[H]
   \centering
@@ -43,6 +43,7 @@ yang dapat dilihat pada gambar \ref{fig:fishbone}.
 
 Adapun penjelasan tentang penelitian terkait yang menjadi 
 dasar dari penelitian ini adalah sebagai berikut:
+% add space after enumerate
 \begin{enumerate}
 \item \emph{Automated Debugging in Data-Intensive Scalable Computing}
 
@@ -70,6 +71,7 @@ Marius Cristian Buzea dan timnya melakukan penelitian di bidang pemrosesan bahas
 
 \end{enumerate}
 
+
 \section{Dasar Teori}
 \label{sec:dasarTeori}
 
@@ -96,7 +98,7 @@ banyak platform yang dibangun untuk dapat memonitoring proses
 kerja sistem DISC~(\cite{dragan2019}). 
 
 Arsitektur DISC menawarkan keuntungan signifikan dalam hal efisiensi dan skalabilitas pemrosesan data. Platform seperti Apache Hadoop dan Apache Spark dirancang untuk memproses data dalam jumlah besar dengan memanfaatkan paralelisme dan distribusi. Dengan pendekatan ini, pemrosesan data menjadi lebih cepat dan biaya operasional dapat dikurangi karena pemrosesan dilakukan secara bersamaan di beberapa node dalam sebuah klaster~(\cite{dean2008}).
-Hal ini dapat dilihat pada gambar \ref{fig:DISCArchitecture}.
+Hal ini dapat dilihat pada \ref{fig:DISCArchitecture}.
 
 \begin{figure}[H]
   \centering
@@ -139,7 +141,7 @@ industri, termasuk analisis data, ilmu data, dan pemrosesan
 aliran data~(\cite{shaikh2019}).
 
 Apache Spark menawarkan arsitektur yang sangat skalabel yang memudahkan pengolahan data besar dalam lingkungan yang terdistribusi. Arsitektur ini terdiri dari driver, executor, dan cluster manager, yang bekerja sama untuk memproses data dalam skala besar secara efisien. Driver bertanggung jawab untuk mengelola pekerjaan dan membagi tugas ke berbagai executor, yang kemudian melakukan pemrosesan data di node-node dalam cluster. Struktur ini memungkinkan Spark untuk mendistribusikan beban kerja secara merata dan mengelola sumber daya dengan efektif, 
-seperti yang digambarkan pada gambar \ref{fig:sparkArsitektur}~(\cite{spark}).
+seperti yang digambarkan pada \ref{fig:sparkArsitektur}~(\cite{spark}).
 
 \begin{figure}[H]
   \centering
@@ -192,7 +194,7 @@ Spark asli~(\cite{interlandi2015}).
 \emph{Natural Language Processing} (NLP) adalah cabang dari kecerdasan buatan yang berfokus pada interaksi antara komputer dan bahasa manusia. Tujuan utama dari NLP adalah untuk memungkinkan komputer untuk memahami, memproses, dan menghasilkan bahasa manusia secara alami~(\cite{jurafsky2021}). NLP telah menjadi bidang penelitian yang sangat penting dalam beberapa tahun terakhir, dengan banyak aplikasi yang berkembang pesat, seperti \emph{chatbots}, \emph{machine translation}, \emph{sentiment analysis}, dan banyak lagi~(\cite{manning2014}). Salah satu alat yang paling populer dalam NLP adalah model bahasa berbasis transformer, seperti GPT-2 dan GPT-3 dari OpenAI, dan BERT dari Google~(\cite{devlin2019}).
 
 Teknologi NLP telah mengalami kemajuan pesat dengan diperkenalkannya model-model transformer yang canggih. Model seperti GPT-3 menggunakan arsitektur yang sangat besar dengan miliaran parameter, memungkinkan mereka untuk menghasilkan teks yang sangat mirip dengan bahasa manusia. Kemampuan ini telah membuka kemungkinan baru dalam aplikasi seperti penulisan otomatis, penjawaban pertanyaan, dan pembuatan konten yang lebih kontekstual dan relevan. Arsitektur dasar dari model-model ini dapat dilihat 
-pada gambar \ref{fig:transformerArsitektur}~(\cite{devlin2019}).
+pada \ref{fig:transformerArsitektur}~(\cite{devlin2019}).
 
 \begin{figure}[H]
   \centering
@@ -251,13 +253,14 @@ dan cocok untuk aplikasi NLP pada perangkat dengan sumber daya
 terbatas. Hasil evaluasi menunjukkan bahwa DistilGPT2 memiliki 
 performa yang kompetitif dan efisien. Hal ini membuat DistilGPT2 
 menjadi pilihan yang menarik dalam pengembangan aplikasi yang 
-bergantung pada analisis teks dengan kecepatan dan efisiensi~(\cite{buzea2022}). 
-Arsitektur DistilGPT2 dapat dilihat pada Gambar 
+bergantung pada analisis teks dengan kecepatan dan efisiensi.
+DistilGPT2 dilatih menggunakan dataset dari OpenWebTextCorpus, sebuah reproduksi sumber terbuka dari dataset WebText milik OpenAI, yang digunakan untuk melatih GPT-2~(\cite{sanh2019}).
+Arsitektur DistilGPT2 dapat dilihat pada 
 \ref{fig:distilgpt2Architecture}.
 
 \begin{figure}[H]
   \centering
-  \includegraphics[scale=0.65]{gambar/DistilledGPT2Architecture.png}
+  \includegraphics[scale=0.62]{gambar/DistilledGPT2Architecture.png}
   \caption{Arsitektur DistilGPT2}
   \label{fig:distilgpt2Architecture}
 \end{figure}
@@ -354,7 +357,7 @@ Fitur auto-scaling di AWS EC2 memungkinkan pengguna untuk secara otomatis menamb
 
 Terakhir, AWS EC2 menawarkan integrasi yang mulus dengan berbagai layanan AWS lainnya, seperti Amazon RDS untuk database, Amazon S3 untuk penyimpanan objek, dan AWS Lambda untuk menjalankan kode tanpa server. Integrasi ini memungkinkan pengembang untuk membangun solusi yang terintegrasi dan skalabel dengan memanfaatkan ekosistem layanan yang luas dan kuat dari AWS~(\cite{chen2023}). 
 Arsitektur AWS EC2 dan fitur-fiturnya dapat dilihat 
-pada gambar \ref{fig:awsEC2Architecture}.
+pada \ref{fig:awsEC2Architecture}.
 
 \begin{figure}[H]
   \centering

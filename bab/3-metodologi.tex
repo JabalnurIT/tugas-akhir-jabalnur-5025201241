@@ -4,7 +4,7 @@
 \section{Metode yang dirancang}
 \label{sec:metode yang dirancang}
 
-Metode yang dirancang pada penelitian ini sebagaimana ditunjukkan pada Gambar \ref{fig:metode}
+Metode yang dirancang pada penelitian ini sebagaimana ditunjukkan pada \ref{fig:metode}
 
 \begin{figure}[H]
   \centering
@@ -138,95 +138,7 @@ Metode yang dirancang pada penelitian ini sebagaimana ditunjukkan pada Gambar \r
     \emph{faulty input} yang serupa.
 
   \end{enumerate}
-
-  % Perancangan metode akan dimulai dengan menggunakan 
-  % Titian untuk melakukan proses \emph{provenance data}. 
-  % Proses ini bertujuan untuk mendapatkan nilai awal dari 
-  % baris dataset yang menyebabkan keluaran yang 
-  % mencurigakan tersebut. Program tersebut akan 
-  % diberikan parameter tertentu agar dapat menghasilkan 
-  % output yang bermasalah. Titian akan melacak asal-usul 
-  % data yang berkontribusi pada terjadinya kesalahan 
-  % dalam output, membantu dalam mengidentifikasi sumber 
-  % data yang menyebabkan masalah tersebut. Dengan 
-  % pemahaman yang lebih mendalam tentang asal-usul 
-  % data yang bermasalah, penelitian ini dapat menetapkan 
-  % dasar yang kuat untuk langkah-langkah perbaikan 
-  % berikutnya. Selain itu, proses ini akan membantu 
-  % memastikan bahwa model memahami konteks dari 
-  % kesalahan yang terjadi, sehingga memungkinkan 
-  % perbaikan yang lebih tepat sasaran. Penelitian 
-  % ini tidak akan mempertimbangkan faktor struktur 
-  % dari data, sehingga memungkinkan untuk digunakan 
-  % pada banyak aplikasi. Dengan demikian, analisis 
-  % ini memberikan wawasan yang lebih mendalam tentang 
-  % bagaimana model berinteraksi dengan data yang 
-  % beragam dan menambah fleksibilitas penggunaannya 
-  % dalam berbagai konteks aplikasi.
   
-  % Setelah proses \emph{provenance data} selesai, 
-  % langkah berikutnya adalah melakukan \emph{pre-training} 
-  % terhadap model DistilGPT2 menggunakan baris dataset 
-  % random dari dataset masing-masing 
-  % \emph{benchmark program} yang akan diuji. 
-  % Langkah ini sangat penting untuk memastikan bahwa 
-  % model DistilGPT2 memiliki dasar yang kuat dalam 
-  % memahami pola umum dalam data sebelum difokuskan 
-  % pada data yang menyebabkan kesalahan. Setelah itu, 
-  % dilakukan proses re-training lagi terhadap model 
-  % DistilGPT2 menggunakan baris dataset penyebab 
-  % kesalahan tersebut. Proses re-training ini 
-  % dirancang untuk memperbaiki dan mengoptimalkan 
-  % model dengan memberikan perhatian khusus pada 
-  % data yang menyebabkan masalah, memastikan bahwa 
-  % model mampu mengenali dan mengatasi kesalahan 
-  % yang sama di masa depan. Kemudian dilakukan 
-  % proses \emph{generate input} baru yang menginduksi 
-  % kesalahan pada program tersebut dengan jumlah yang 
-  % seminimal mungkin dapat dianalisis oleh 
-  % \emph{developer}. Proses ini memungkinkan 
-  % pengembang untuk menguji program dengan input 
-  % baru yang dihasilkan oleh model, dan kemudian 
-  % secara manual menganalisis output untuk menemukan 
-  % sumber masalah. Untuk menguji keefektifan model,
-  % hasil dari proses ini kemudian akan dijalankan
-  % kembali menggunakan program yang sama untuk
-  % melihat apakah program tersebut masih
-  % menghasilkan keluaran yang bermasalah atau tidak. 
-  % Hasil tersebut akan menunjukkan kemiripan dari 
-  % karakteristik data yang dihasilkan oleh model
-  % dengan data yang menyebabkan kesalahan pada program.
-  % Alur keseluruhan proses tersebut dapat dilihat pada 
-  % Gambar \ref{fig:arsitektur}.
-
-
-  % Tahap perancangan arsitektur sistem pada penelitian ini 
-  % dilakukan dengan mengombinasikan dasar teori dan penelitian 
-  % terkait pada Bab \ref{chap:tinjauanpustaka}. 
-  % Perancangan metode akan dimulai dari proses \emph{pre-training}
-  % terhadap model DistilGPT2 menggunakan baris dataset random dari 
-  % dataset masing-masing \emph{benchmark program} yang akan 
-  % diuji. Kemudian program tersebut akan diberikan parameter tertentu 
-  % agar dapat menghasilkan output yang bermasalah.
-  % Dengan menggunakan Titian, akan dilakukan proses \emph{provenance data}
-  % untuk mendapatkan nilai awal dari baris dataset yang menyebabkan
-  % keluaran yang mencurigakan tersebut. 
-  % Dilakukan proses re-training lagi terhadap
-  % model DistilGPT2 menggunakan baris dataset penyebab kesalahan
-  % tersebut yang kemudian dilakukan proses \emph{generate input}
-  % baru yang menginduksi kesalahan pada program tersebut dengan jumlah
-  % yang seminimal mungkin dapat dianalisis oleh \emph{developer}. 
-  % Hasil dari proses ini kemudian akan dijalankan kembali menggunakan
-  % program yang sama untuk melihat apakah program tersebut masih
-  % menghasilkan keluaran yang bermasalah atau tidak.
-  % Alur keseluruhan proses tersebut dapat dilihat pada 
-  % Gambar \ref{fig:arsitektur}.
-
-
-  
-
-  % Bahas tentang perubahan data dari structured ke unstructured sebanyak satu paragraf
-
   Pada saat FISUM ditanamkan pada aplikasi DISC, 
   data yang dihasilkan oleh Titian berupa data 
   \emph{structured} yang terdiri dari beberapa kolom. 
@@ -249,13 +161,13 @@ Metode yang dirancang pada penelitian ini sebagaimana ditunjukkan pada Gambar \r
   kemudian diubah kembali menjadi data \emph{structured}
   untuk dapat dijalankan kembali pada aplikasi DISC.
   Alur perubahan data dari \emph{structured} ke \emph{unstructured}
-  dan sebaliknya dapat dilihat pada gambar \ref{fig:AlurPerubahanData}.
+  dan sebaliknya dapat dilihat pada \ref{fig:AlurPerubahanData}.
   Warna merah pada dataset yang ditunjukkan oleh gambar
   tersebut menunjukkan data yang menginduksi kesalahan.
 
   \begin{figure}[H]
     \centering
-    \includegraphics[scale=0.45]{gambar/ArsitekturFISUM.png}
+    \includegraphics[scale=0.44]{gambar/ArsitekturFISUM.png}
   
     % Ubah dengan keterangan gambar yang diinginkan
     \caption{Rancangan Arsitektur Sistem}
@@ -282,7 +194,7 @@ Metode yang dirancang pada penelitian ini sebagaimana ditunjukkan pada Gambar \r
   % Tahap perancangan metode generate input dilakukan dengan 
   % melakukan proses traning dan re-training terhadap 
   % DistilGPT2 model yang memiliki \emph{hyperparameter} seperti
-  % pada Tabel \ref{tab:hyperparameter}.
+  % pada \ref{tab:hyperparameter}.
   % Proses ini dilakukan dengan membuat sebuah
   % API dengan menggunakan FastAPI yang dapat diakses oleh pengguna. 
   % API ini akan memiliki beberapa endpoint yang dapat digunakan 
@@ -297,7 +209,7 @@ Metode yang dirancang pada penelitian ini sebagaimana ditunjukkan pada Gambar \r
 
 Tahap perancangan metode \emph{generate input} dilakukan dengan 
 melakukan proses training dan re-training terhadap model DistilGPT2 
-yang memiliki \emph{hyperparameter} seperti pada Tabel \ref{tab:hyperparameter}. 
+yang memiliki \emph{hyperparameter} seperti pada \ref{tab:hyperparameter}. 
 Proses ini dilakukan dengan membuat sebuah API menggunakan FastAPI 
 yang dapat diakses oleh pengguna. API ini akan memiliki beberapa 
 endpoint yang dapat digunakan oleh pengguna untuk melakukan proses 
@@ -371,23 +283,24 @@ gambar \ref{fig:generateinput} dan tabel \ref{tab:api}.
 Berikut adalah penjelasan lebih 
 detail tentang setiap endpoint tersebut:
 
-\begin{enumerate}[topsep=0pt, itemsep=0pt]
-    \item \textbf{list-model}\\
+\begin{enumerate}[topsep=0pt, noitemsep]
+    \item \textbf{\emph{list-model}}\\
     Endpoint ini mengembalikan daftar nama model yang tersedia. Pengguna dapat menggunakan endpoint ini untuk melihat model mana saja yang tersedia dan dapat digunakan. Ini membantu dalam pengelolaan model dengan memberikan informasi mengenai model yang telah di-deploy dan siap digunakan.
     
-    \item \textbf{use-model}\\
+    \item \textbf{\emph{use-model}}\\
     Endpoint ini digunakan untuk mengubah model yang sedang digunakan. Jika model yang diminta tidak ada dalam daftar, sistem akan membuat model baru dari model dasar. Endpoint ini berguna untuk pengembang yang ingin berpindah antara berbagai model atau membuat model baru berdasarkan kebutuhan spesifik mereka.
     
-    \item \textbf{retrain}\\
+    \item \textbf{\emph{retrain}}\\
     Endpoint ini digunakan untuk melakukan re-training terhadap model yang sedang digunakan. Proses re-training penting untuk memperbarui model dengan data baru atau memperbaiki performa model berdasarkan umpan balik terbaru. Endpoint ini memungkinkan pengembang untuk terus mengoptimalkan model agar tetap relevan dan akurat.
     
-    \item \textbf{generate}\\
+    \item \textbf{\emph{generate}}\\
     Endpoint ini digunakan untuk menghasilkan input baru menggunakan model yang sedang digunakan. Endpoint ini memungkinkan pengguna untuk menghasilkan teks atau data baru yang dihasilkan oleh model DistilGPT2. Ini sangat berguna dalam aplikasi yang membutuhkan pembuatan teks otomatis atau analisis data.
     
-    \item \textbf{reset}\\
+    \item \textbf{\emph{reset}}\\
     Endpoint ini digunakan untuk mengatur ulang model yang sedang digunakan ke kondisi dasar. Proses reset ini penting untuk mengembalikan model ke keadaan awal sebelum dilakukan re-training atau modifikasi lainnya. Ini berguna ketika pengembang perlu menghapus perubahan dan memulai kembali dari model dasar.
+    \\
     
-    \item \textbf{delete}\\
+    \item \textbf{\emph{delete}}\\
     Endpoint ini digunakan untuk menghapus model yang sedang digunakan. Penghapusan model diperlukan ketika model sudah tidak lagi dibutuhkan atau untuk membersihkan ruang penyimpanan. Endpoint ini memberikan fleksibilitas kepada pengembang untuk mengelola dan menghapus model sesuai kebutuhan.
 \end{enumerate}
 
@@ -512,7 +425,7 @@ penelitian ini:
 Pada fase ini, sistem FISUM mengidentifikasi data 
 yang menyebabkan keluaran yang mencurigakan atau 
 kesalahan pada sistem DISC. Alur kerja penggunaan Titian pada \emph{benchmark program}
-dapat dilihat pada Gambar \ref{fig:diagramofprogramwithtitian}.
+dapat dilihat pada \ref{fig:diagramofprogramwithtitian}.
 
 \begin{figure}[H]
   \centering
@@ -532,7 +445,7 @@ dapat dilihat pada Gambar \ref{fig:diagramofprogramwithtitian}.
         \item \textbf{Unduh \emph{Library} Titian:} Unduh Titian dari repositori Spark dan ekstrak ke direktori yang diinginkan. Versi Titian yang digunakan adalah spark-2.1.1-SNAPSHOT-bin-titian-2.1.
         \item \textbf{Masukkan \emph{File} Jar:} Masukkan file jar Titian ke dalam proyek Scala dengan cara membuka \emph{project structure}, SDKs, \emph{classpath}, dan pilih semua 
         \emph{file} jar Titian yang diperlukan dari dalam \emph{folder} jars Titian. Proses tersebut dapat dilihat
-        pada Gambar \ref{fig:masukkanfilejar}.
+        pada \ref{fig:masukkanfilejar}.
 
         \begin{figure}[H]
           \centering
@@ -544,7 +457,7 @@ dapat dilihat pada Gambar \ref{fig:diagramofprogramwithtitian}.
         \end{figure}
       \end{enumerate}
       \item \textbf{Pengaturan Titian:} Konfigurasikan Titian untuk melacak data yang berkontribusi pada keluaran yang mencurigakan, mengidentifikasi bagian dari data yang menyebabkan kesalahan.
-      Kode untuk mengatur Titian untuk melacak data dapat dilihat pada Kode Sumber \ref{lst:settinguptitian}.
+      Kode untuk mengatur Titian untuk melacak data dapat dilihat pada \ref{lst:settinguptitian}.
 
       \lstinputlisting[
         language=Scala,
@@ -565,7 +478,7 @@ dapat dilihat pada Gambar \ref{fig:diagramofprogramwithtitian}.
   \begin{itemize}
 
     \item \textbf{Lacak \emph{Lineage} Data:} Gunakan Titian untuk melacak provenance data dari keluaran yang bermasalah ke data input yang menyebabkan kesalahan.
-    Kode untuk melacak provenance data menggunakan Titian dapat dilihat pada Kode Sumber \ref{lst:trackprovenancedata}.
+    Kode untuk melacak provenance data menggunakan Titian dapat dilihat pada \ref{lst:trackprovenancedata}.
 
     \lstinputlisting[
       language=Scala,
@@ -574,11 +487,11 @@ dapat dilihat pada Gambar \ref{fig:diagramofprogramwithtitian}.
       captionpos=b
     ]{program/scala/titian/track-provenance-data-pseu.scala}
 
-    Pada Kode Sumber \ref{lst:trackprovenancedata}, \texttt{lc.setCaptureLineage(true)} digunakan untuk mengaktifkan \emph{lineage capture} sebelum menjalankan aplikasi \emph{DISC}. Kode aplikasi \emph{DISC} ditempatkan di antara dua pemanggilan \texttt{setCaptureLineage}, yang memungkinkan pelacakan semua operasi yang dilakukan selama eksekusi aplikasi tersebut. Setelah aplikasi \emph{DISC} selesai dijalankan, \texttt{lc.setCaptureLineage(false)} dipanggil untuk menonaktifkan \emph{lineage capture}.
+    pada \ref{lst:trackprovenancedata}, \texttt{lc.setCaptureLineage(true)} digunakan untuk mengaktifkan \emph{lineage capture} sebelum menjalankan aplikasi \emph{DISC}. Kode aplikasi \emph{DISC} ditempatkan di antara dua pemanggilan \texttt{setCaptureLineage}, yang memungkinkan pelacakan semua operasi yang dilakukan selama eksekusi aplikasi tersebut. Setelah aplikasi \emph{DISC} selesai dijalankan, \texttt{lc.setCaptureLineage(false)} dipanggil untuk menonaktifkan \emph{lineage capture}.
 
 
       \item \textbf{Pengambilan Data:} Ambil dataset dari sistem DISC yang berkontribusi pada keluaran yang mencurigakan.
-      Kode untuk mengambil data dari Titian dapat dilihat pada Kode Sumber \ref{lst:getdatafromtitian}.
+      Kode untuk mengambil data dari Titian dapat dilihat pada \ref{lst:getdatafromtitian}.
 
       \lstinputlisting[
         language=Scala,
@@ -587,11 +500,10 @@ dapat dilihat pada Gambar \ref{fig:diagramofprogramwithtitian}.
         captionpos=b
       ]{program/scala/titian/get-data-from-titian-pseu.scala}
 
-      Pada Kode Sumber \ref{lst:getdatafromtitian}, \texttt{var linRdd = mapped2.getLineage()} digunakan untuk mendapatkan \emph{lineage} dari \texttt{mapped2} dan menyimpannya dalam variabel \texttt{linRdd}. Kemudian, \texttt{linRdd = linRdd.goBackAll()} dipanggil untuk mengembalikan \emph{lineage} ke tahap awal dari semua operasi yang telah dilakukan, sehingga dapat melacak kembali semua transformasi yang terjadi. 
+      pada \ref{lst:getdatafromtitian}, \texttt{var linRdd = mapped2.getLineage()} digunakan untuk mendapatkan \emph{lineage} dari \texttt{mapped2} dan menyimpannya dalam variabel \texttt{linRdd}. Kemudian, \texttt{linRdd = linRdd.goBackAll()} dipanggil untuk mengembalikan \emph{lineage} ke tahap awal dari semua operasi yang telah dilakukan, sehingga dapat melacak kembali semua transformasi yang terjadi. 
       
       Terakhir, \texttt{linRdd.show.saveAsTextFile("src/output/faulty-data")} digunakan untuk menampilkan dan menyimpan hasil \emph{lineage} dalam bentuk file teks di direktori \texttt{"src/output/faulty-data"}, yang berisi data yang diidentifikasi sebagai \emph{faulty}.
-      \\
-      \\
+   
 
   \end{itemize}
 \end{enumerate}
@@ -630,7 +542,7 @@ dapat dilihat pada Gambar \ref{fig:diagramofprogramwithtitian}.
 
 
       \item \textbf{Melihat List Model DistilGPT2 yang Tersedia:} Lihat model DistilGPT2 yang tersedia dan yang sedang digunakan untuk \emph{training} atau \emph{re-training}, dan \emph{generate} input baru.
-      Kode untuk melihat list model DistilGPT2 yang tersedia dapat dilihat pada Kode Sumber \ref{lst:listmodel}.
+      Kode untuk melihat list model DistilGPT2 yang tersedia dapat dilihat pada \ref{lst:listmodel}.
 
       \lstinputlisting[
         language=Python,
@@ -644,7 +556,7 @@ dapat dilihat pada Gambar \ref{fig:diagramofprogramwithtitian}.
       Pertama, \texttt{self.model\_list = get\_dir\_list(config["USED\_DIR"])} digunakan untuk mendapatkan daftar model yang tersedia di direktori yang ditentukan oleh \emph{konfigurasi} \texttt{config["USED\_DIR"]} dan menyimpannya dalam \texttt{self.model\_list}. Kemudian, \texttt{return self.current\_model, self.model\_list} mengembalikan model yang sedang digunakan (\texttt{self.current\_model}) dan daftar model yang tersedia (\texttt{self.model\_list}) sebagai hasil.
 
       \item \textbf{Memilih Model DistilGPT2 sesuai dengan \emph{Benchmark Program}:} Pilih model DistilGPT2 yang sesuai dengan \emph{benchmark program} yang akan diuji.
-      Kode untuk memilih model DistilGPT2 dapat dilihat pada Kode Sumber \ref{lst:selectmodel}.
+      Kode untuk memilih model DistilGPT2 dapat dilihat pada \ref{lst:selectmodel}.
 
       \lstinputlisting[
         language=Python,
@@ -676,7 +588,7 @@ dapat dilihat pada Gambar \ref{fig:diagramofprogramwithtitian}.
       % \item \textbf{Setup DistilGPT2:} Setup model DistilGPT2 
       % milik HuggingFace untuk melakukan \emph{training} 
       % atau \emph{re-training} model.
-      % Kode untuk setup model DistilGPT2 dapat dilihat pada Kode Sumber \ref{lst:setupdistilgpt2}.
+      % Kode untuk setup model DistilGPT2 dapat dilihat pada \ref{lst:setupdistilgpt2}.
 
       % \lstinputlisting[
       %   language=Python,
@@ -685,7 +597,7 @@ dapat dilihat pada Gambar \ref{fig:diagramofprogramwithtitian}.
       %   captionpos=b
       % ]{program/python/setup-distilgpt2.py}
 
-      \item \textbf{Setup Training Model:} Persiapkan data dan konfigurasi model DistilGPT2 untuk \emph{training} atau \emph{re-training}. Pastikan data sudah diproses sesuai format yang diinginkan dan atur hyperparameter seperti \emph{learning rate} dan ukuran \emph{batch}. Kode untuk setup \emph{training} model DistilGPT2 dapat dilihat pada Kode Sumber \ref{lst:setuptrainingdistilgpt2}.
+      \item \textbf{Setup Training Model:} Persiapkan data dan konfigurasi model DistilGPT2 untuk \emph{training} atau \emph{re-training}. Pastikan data sudah diproses sesuai format yang diinginkan dan atur hyperparameter seperti \emph{learning rate} dan ukuran \emph{batch}. Kode untuk setup \emph{training} model DistilGPT2 dapat dilihat pada \ref{lst:setuptrainingdistilgpt2}.
       \\
       \\
       \\
@@ -714,7 +626,7 @@ dapat dilihat pada Gambar \ref{fig:diagramofprogramwithtitian}.
       Akhirnya, pada baris 33, waktu awal pelatihan dicatat dengan menggunakan fungsi \texttt{time.time()}, dan model dipindahkan ke perangkat yang sesuai (GPU atau CPU) menggunakan \texttt{self.model.to(self.device)}.
       \\
 
-      \item \textbf{Training Model:} Latih model DistilGPT2 menggunakan data yang telah disiapkan dengan memulai proses pelatihan. Selama \emph{training}, model akan memproses data dalam beberapa iterasi (epochs), memperbarui parameter berdasarkan feedback dari fungsi kerugian untuk meningkatkan akurasi. Pastikan untuk memantau kinerja model dan menyesuaikan hyperparameter sesuai kebutuhan untuk mencapai hasil terbaik. Proses ini biasanya memanfaatkan perangkat keras seperti GPU untuk efisiensi. Kode untuk \emph{training} model DistilGPT2 dapat dilihat pada Kode Sumber \ref{lst:trainingdistilgpt2}.
+      \item \textbf{Training Model:} Latih model DistilGPT2 menggunakan data yang telah disiapkan dengan memulai proses pelatihan. Selama \emph{training}, model akan memproses data dalam beberapa iterasi (epochs), memperbarui parameter berdasarkan feedback dari fungsi kerugian untuk meningkatkan akurasi. Pastikan untuk memantau kinerja model dan menyesuaikan hyperparameter sesuai kebutuhan untuk mencapai hasil terbaik. Proses ini biasanya memanfaatkan perangkat keras seperti GPU untuk efisiensi. Kode untuk \emph{training} model DistilGPT2 dapat dilihat pada \ref{lst:trainingdistilgpt2}.
       \\
       \\
       
@@ -727,7 +639,7 @@ dapat dilihat pada Gambar \ref{fig:diagramofprogramwithtitian}.
         captionpos=b
       ]{program/python/training-distilgpt2.py}
 
-      Pada Kode Sumber \ref{lst:trainingdistilgpt2}, proses pelatihan model dilakukan dalam beberapa epoch yang ditentukan oleh \texttt{self.epochs}. Untuk setiap epoch, waktu mulai dicatat pada baris pertama.
+      pada \ref{lst:trainingdistilgpt2}, proses pelatihan model dilakukan dalam beberapa epoch yang ditentukan oleh \texttt{self.epochs}. Untuk setiap epoch, waktu mulai dicatat pada baris pertama.
       Di dalam loop epoch, \texttt{self.model.train()} mengatur model dalam mode pelatihan. Selanjutnya, untuk setiap batch dalam \texttt{train\_dataloader}, input, label, dan masker perhatian dipindahkan ke perangkat (GPU/CPU) yang sesuai. Model direset gradienya dengan \texttt{self.model.zero\_grad()}.
       \\
 
@@ -737,7 +649,7 @@ dapat dilihat pada Gambar \ref{fig:diagramofprogramwithtitian}.
       \\
 
       \item \textbf{Generate Input:} Hasilkan \emph{faulty input} baru yang menginduksi kesalahan menggunakan model DistilGPT2 yang telah dilatih.
-      Kode untuk menghasilkan \emph{faulty input} baru dapat dilihat pada Kode Sumber \ref{lst:generateinput}.
+      Kode untuk menghasilkan \emph{faulty input} baru dapat dilihat pada \ref{lst:generateinput}.
 
       \lstinputlisting[
         language=Python,
@@ -746,7 +658,7 @@ dapat dilihat pada Gambar \ref{fig:diagramofprogramwithtitian}.
         captionpos=b
       ]{program/python/generate-input.py}
 
-      Pada Kode Sumber \ref{lst:generateinput}, pertama-tama, program memeriksa apakah model yang saat ini dipilih adalah "none" pada baris pertama. Jika demikian, akan mengembalikan pesan kesalahan yang menunjukkan bahwa tidak ada model yang dipilih dan meminta pengguna untuk memilih model dari daftar yang tersedia.
+      pada \ref{lst:generateinput}, pertama-tama, program memeriksa apakah model yang saat ini dipilih adalah "none" pada baris pertama. Jika demikian, akan mengembalikan pesan kesalahan yang menunjukkan bahwa tidak ada model yang dipilih dan meminta pengguna untuk memilih model dari daftar yang tersedia.
       Jika model yang saat ini dipilih valid, program melanjutkan dengan mengatur model ke mode evaluasi dengan \texttt{self.model.eval()} pada baris 2. Ini memastikan bahwa model berfungsi dalam mode evaluasi, di mana beberapa mekanisme seperti dropout dinonaktifkan.
       Selanjutnya, prompt kosong diinisialisasi dan diubah menjadi tensor dengan menggunakan tokenizer pada baris 4 hingga 6. Tensor ini kemudian dipindahkan ke perangkat yang sesuai (GPU/CPU) dengan \texttt{to(self.device)}.
       \\
@@ -758,7 +670,7 @@ dapat dilihat pada Gambar \ref{fig:diagramofprogramwithtitian}.
 
       \item \textbf{Reset Model:} Kembalikan model DistilGPT2 ke kondisi awal sebelum \emph{training} atau \emph{re-training}.
       Hal ini dilakukan untuk membersihkan model dari data yang telah digunakan dan mempersiapkan model untuk \emph{training} atau \emph{re-training} selanjutnya.
-      Kode untuk mereset model DistilGPT2 dapat dilihat pada Kode Sumber \ref{lst:resetmodel}.
+      Kode untuk mereset model DistilGPT2 dapat dilihat pada \ref{lst:resetmodel}.
 
       \lstinputlisting[
         language=Python,
@@ -781,7 +693,7 @@ dapat dilihat pada Gambar \ref{fig:diagramofprogramwithtitian}.
 
       \item \textbf{Hapus Model:} Hapus model DistilGPT2 yang tidak diperlukan lagi.
       Hal ini dilakukan untuk membersihkan ruang penyimpanan dan mengelola model yang digunakan.
-      Kode untuk menghapus model DistilGPT2 dapat dilihat pada Kode Sumber \ref{lst:deletemodel}.
+      Kode untuk menghapus model DistilGPT2 dapat dilihat pada \ref{lst:deletemodel}.
 
       \lstinputlisting[
         language=Python,
@@ -796,7 +708,7 @@ dapat dilihat pada Gambar \ref{fig:diagramofprogramwithtitian}.
       Terakhir, \texttt{self.model\_list} diperbarui dengan memanggil \texttt{get\_dir\_list()} pada baris 3. Fungsi ini mengembalikan daftar model yang tersedia di direktori \texttt{config["USED\_DIR"]}, yang kemudian disimpan dalam \texttt{self.model\_list}. Dengan cara ini, daftar model yang tersedia selalu diperbarui untuk mencerminkan status terbaru sistem.
 
       \item \textbf{Deployment FastAPI:} Deploy API FastAPI ke server lokal atau cloud untuk memudahkan pengguna dalam mengakses dan menggunakan API.
-      Kode untuk melakukan \emph{deployment} FastAPI dapat dilihat pada Kode Sumber \ref{lst:deploymentfastapi}.
+      Kode untuk melakukan \emph{deployment} FastAPI dapat dilihat pada \ref{lst:deploymentfastapi}.
 
       \lstinputlisting[
         caption={Deployment FastAPI},
@@ -812,7 +724,7 @@ dapat dilihat pada Gambar \ref{fig:diagramofprogramwithtitian}.
   \item \textbf{Integrasi dengan Scala:}
   \begin{itemize}
       \item \textbf{Akses API dari Scala:} Buat panggilan HTTP untuk berinteraksi dengan API FastAPI dari aplikasi Scala.
-      Kode untuk mengakses API FastAPI dari Scala dapat dilihat pada Kode Sumber \ref{lst:scala-api-pseudocode}.
+      Kode untuk mengakses API FastAPI dari Scala dapat dilihat pada \ref{lst:scala-api-pseudocode}.
 
       \lstinputlisting[
         caption={\emph{Pseudocode} penggunaan API pada Scala},
@@ -836,7 +748,7 @@ dapat dilihat pada Gambar \ref{fig:diagramofprogramwithtitian}.
   \item \textbf{Konversi Data \emph{Structured} ke \emph{Unstructured}:} Gabungkan kolom data menggunakan separator "," untuk mempersiapkan data sebelum digunakan dalam model DistilGPT2.
   Agar dapat dikirim melalui API FastAPI, data kemudian diubah menjadi satu text utuh dengan
   menyatukan baris data menggunakan separator "\#\#\#".
-  Proses konversi data dari \emph{structured} ke \emph{unstructured} dapat dilihat pada Kode Sumber \ref{lst:structuredtounstructured}.
+  Proses konversi data dari \emph{structured} ke \emph{unstructured} dapat dilihat pada \ref{lst:structuredtounstructured}.
 
   \lstinputlisting[
     language=Scala,
@@ -861,7 +773,7 @@ Untuk mengevaluasi kemiripan antara \emph{faulty input} awal dan \emph{faulty in
 \begin{enumerate}[topsep=0pt]
     \item \textbf{Pengujian Akurasi:}
     Setelah \emph{faulty input} baru dihasilkan, langkah pertama adalah menjalankan data ini dalam aplikasi DISC yang sudah ditanamkan dengan Titian. Ini untuk memverifikasi apakah aplikasi DISC masih menghasilkan keluaran yang bermasalah saat diberikan \emph{faulty input} baru. Pengujian ini memastikan bahwa \emph{faulty input} baru benar-benar dapat mereplikasi kesalahan yang sama seperti \emph{faulty input} awal.
-    Kode untuk memverifikasi akurasi \emph{faulty input} baru dapat dilihat pada Kode Sumber \ref{lst:verifyaccuracy}.
+    Kode untuk memverifikasi akurasi \emph{faulty input} baru dapat dilihat pada \ref{lst:verifyaccuracy}.
 
     \lstinputlisting[
       language=Scala,
@@ -879,7 +791,7 @@ Untuk mengevaluasi kemiripan antara \emph{faulty input} awal dan \emph{faulty in
 
     \item \textbf{Perhitungan MSE (Mean Squared Error):}
       Untuk mengukur kemiripan antara \emph{faulty input} awal dan \emph{faulty input} baru secara kuantitatif, kita menghitung Mean Squared Error (MSE) dari perbandingan karakteristik yang dimiliki kedua jenis \emph{faulty input}. MSE memberikan ukuran seberapa besar perbedaan antara karakteristik \emph{faulty input} yang dimiliki oleh kedua dataset tersebut.
-      Kode untuk menghitung MSE antara \emph{faulty input} awal dan baru dapat dilihat pada Kode Sumber \ref{lst:calculatemse}.
+      Kode untuk menghitung MSE antara \emph{faulty input} awal dan baru dapat dilihat pada \ref{lst:calculatemse}.
 
       \lstinputlisting[
         language=Scala,

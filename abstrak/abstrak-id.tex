@@ -14,7 +14,6 @@
   Judul Tugas Akhir & : & \tatitle{}      \\
 
   Pembimbing        & : & 1. \advisor{}   \\
-  \\
 \end{tabularx}
 \endgroup
 
@@ -29,7 +28,7 @@ Framework pemrosesan data skala besar seperti Apache Spark telah memungkinkan \t
 
 FISUM menggunakan Titian, sebuah \textit{Data Provenance Engine} yang dibangun untuk Apache Spark, untuk memulihkan input yang menyebabkan kesalahan. \textit{Data Provenance Engine} merupakan sebuah sistem yang melacak asal-usul, sejarah, dan perjalanan data dalam sebuah sistem komputasi untuk memudahkan dalam mengidentifikasi sumber kesalahan dan memahami transformasi data dari sumber aslinya hingga ke bentuk akhirnya. Titian kemudian ditanamkan ke dalam aplikasi DISC yang memiliki keluaran bermasalah untuk menemukan \textit{Faulty Input}, yaitu baris data pada dataset yang menjadi penyebab keluaran bermasalah pada aplikasi DISC. Sebuah \textit{lightweight language model}, DistilGPT2 milik HuggingFace \textit{Faulty Input} kemudian dilatih menggunakan dataset awal milik aplikasi DISC untuk membiasakan model tersebut dengan dataset aplikasi, kemudian model tersebut dilatih kembali dengan menggunakan \textit{Faulty Input} dari Titian untuk memahami karakteristik dari \textit{Faulty Input} tersebut. DistilGPT2 yang telah dilatih akhirnya dapat digunakan untuk menghasilkan \textit{Faulty Input} baru yang memiliki ukuran yang jauh lebih kecil dari ukuran aslinya dengan tetap mempertahankan kemiripan karakteristik kesalahan pada \textit{Faulty Input} awal dalam waktu yang cukup singkat.
 
-Percobaan dilakukan dengan menguji 16 \textit{Benchmark Application} yang merupakan aplikasi DISC dengan menghitung tingkat akurasi FISUM dalam menemukan \textit{Faulty Input} pada dataset aplikasi, menghitung tingkat akurasi dari kesalahan yang dimiliki oleh \textit{Faulty Input} baru dan menghitung \textit{Mean Square Error (MSE)} dari karakteristik yang dimiliki oleh \textit{Faulty Input} awal dan baru. FISUM secara efektif dapat menemukan \textit{Faulty Input} pada aplikasi DISC dengan akurasi 100\%, dapat merangkum \textit{Faulty Input} dengan tingkat akurasi 99\% dalam waktu kurang dari 50 milidetik per baris rata-rata, dan dapat menyajikan kemiripan karakteristik dari \textit{Faulty Input} awal dan baru dengan MSE sebesar 0.08.
+Percobaan dilakukan dengan menguji 16 \textit{Benchmark Application} yang merupakan aplikasi DISC dengan menghitung tingkat akurasi FISUM dalam menemukan \textit{Faulty Input} pada dataset aplikasi, menghitung tingkat akurasi dari kesalahan yang dimiliki oleh \textit{Faulty Input} baru dan menghitung \textit{Mean Square Error (MSE)} dari karakteristik yang dimiliki oleh \textit{Faulty Input} awal dan baru. FISUM secara efektif dapat menemukan \textit{Faulty Input} pada aplikasi DISC dengan akurasi 100\%, dapat merangkum \textit{Faulty Input} dengan tingkat akurasi 99.4\% dalam waktu kurang dari 0.082 detik per baris, dan dapat menyajikan kemiripan karakteristik dari \textit{Faulty Input} awal dan baru dengan MSE sebesar 0.262.
 
 
 % Ubah kata-kata berikut dengan kata kunci dari tugas akhir
